@@ -4,7 +4,7 @@ AYW SparkUpYourLife App is an Augumented Reality app that is changing the way pe
 
 ## Getting Started
 
-To get started, clone and download the repo, install dependencies and run on your local machine or on your iOS device using the expo app.
+To get started, clone and download the repo, install dependencies and run on your local machine or on your iOS or android device using the viro media app.
 
 ### Prerequisites
 
@@ -22,12 +22,14 @@ A step by step series of examples that tell you how to get a development env run
 ```
 Install Apple Xcode SDK
 Clone and download repo
+Install Viro Media App on iOS or Android device
 
 ```
 Install dependencies > npm install
 Start project > npm start
 ```
-
+Open Viro Media App on iOS or Android device and tap on "Enter Testbed".
+Type in your ngrok url, located at the top of the terminal window where you ran npm start, into the empty text field on Testbed screen (xxxxxx.ngrok.io) and press "Go".
 ```
 
 ## Deployment
