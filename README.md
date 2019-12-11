@@ -39,7 +39,7 @@ See above steps for deployment instructions
 ## Built With
 
 - [React Native] (https://facebook.github.io/react-native/)
-- [Viro React] -
+- [Viro React] - (https://viromedia.com/viroreact)
 - [Firebase] - (https://firebase.google.com/)
 - [Kitten UI] - (https://akveo.github.io/react-native-ui-kitten/)
 
