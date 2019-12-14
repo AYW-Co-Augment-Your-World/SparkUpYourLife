@@ -40,27 +40,27 @@ See above steps for deployment instructions
 ## Built With
 
 - [React Native](https://facebook.github.io/react-native/)
-- [ViroReact] - (https://viromedia.com/)
-- [Expo] - (https://expo.io/)
-- [AR Kit] - (https://docs.expo.io/versions/latest/sdk/AR/)
-- [Firebase] - (https://firebase.google.com/)
+- [ViroReact](https://viromedia.com/)
+- [Expo](https://expo.io/)
+- [AR Kit](https://docs.expo.io/versions/latest/sdk/AR/)
+- [Firebase](https://firebase.google.com/)
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/AYW-Co-Augment-Your-World/SparkUpYourLife/tags).
 
 ## Authors
 
-- **Arthur Sandro** - _Initial work_ - [Spark](https://github.com/Spark)
-- **Dominique Boyer** - _Initial work_ - [Spark](https://github.com/Spark)
-- **James Fuller** - _Initial work_ - [Spark](https://github.com/Spark)
-- **Rob Wise** - _Initial work_ - [Spark](https://github.com/Spark)
+- **Arthur Sandro** - _Initial work_ - [Spark](https://github.com/AYW-Co-Augment-Your-World/SparkUpYourLife)
+- **Dominique Boyer** - _Initial work_ - [Spark](https://github.com/AYW-Co-Augment-Your-World/SparkUpYourLife)
+- **James Fuller** - _Initial work_ - [Spark](https://github.com/AYW-Co-Augment-Your-World/SparkUpYourLife)
+- **Rob Wise** - _Initial work_ - [Spark](https://github.com/AYW-Co-Augment-Your-World/SparkUpYourLife)
 
 See also the list of [contributors](https://github.com/AYW-Co-Augment-Your-World/SparkUpYourLife/graphs/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License
 
 ## Acknowledgments
 
