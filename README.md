@@ -40,14 +40,10 @@ See above steps for deployment instructions
 ## Built With
 
 - [React Native](https://facebook.github.io/react-native/)
+- [ViroReact] - (https://viromedia.com/)
 - [Expo] - (https://expo.io/)
 - [AR Kit] - (https://docs.expo.io/versions/latest/sdk/AR/)
 - [Firebase] - (https://firebase.google.com/)
-- [Kitten UI] - (https://akveo.github.io/react-native-ui-kitten/)
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
@@ -60,7 +56,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 - **James Fuller** - _Initial work_ - [Spark](https://github.com/Spark)
 - **Rob Wise** - _Initial work_ - [Spark](https://github.com/Spark)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/AYW-Co-Augment-Your-World/SparkUpYourLife/graphs/contributors) who participated in this project.
 
 ## License
 
