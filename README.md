@@ -19,18 +19,16 @@ Apple Xcode SDK
 A step by step series of examples that tell you how to get a development env running
 
 ```
-Install Apple Xcode SDK
 Clone and download repo
-Install Expo App on iOS device (Optional)
+Download ViroMedia app on iPhone or Android device
 ```
 
 Install dependencies > npm install
 Start project > npm start
 
 ```
-Run iOS emulator by pressing 'i' once expo has started
-OR
-Scan Expo QR code with camera on iOS device to run on device instead of emulator
+Run app on ViroMedia by clicking the menu and clicking "Enter testbed"
+Enter the NGrok Packager Server endpoint address and click Go
 ```
 
 ## Deployment
@@ -41,7 +39,6 @@ See above steps for deployment instructions
 
 - [React Native](https://facebook.github.io/react-native/)
 - [ViroReact](https://viromedia.com/)
-- [Expo](https://expo.io/)
 - [AR Kit](https://docs.expo.io/versions/latest/sdk/AR/)
 - [Firebase](https://firebase.google.com/)
 

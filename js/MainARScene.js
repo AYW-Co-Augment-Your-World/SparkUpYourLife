@@ -25,7 +25,7 @@ import {
   ViroQuad
 } from 'react-viro';
 
-export class HelloWorldSceneAR extends Component {
+export class MainARScene extends Component {
   state = {
     isTracking: false,
     initialized: false,
@@ -139,7 +139,7 @@ export class HelloWorldSceneAR extends Component {
   };
 }
 
-var styles = StyleSheet.create({
+let styles = StyleSheet.create({
   textStyle: {
     flex: 0.5,
     fontFamily: 'Roboto',
@@ -204,4 +204,4 @@ ViroAnimations.registerAnimations({
 
 // module.exports = BusinessCard;
 
-module.exports = HelloWorldSceneAR;
+module.exports = MainARScene;
