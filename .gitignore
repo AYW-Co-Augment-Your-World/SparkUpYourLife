@@ -54,3 +54,21 @@ buck-out/
 
 # Bundle artifact
 *.jsbundle
+
+# config files
+.watchmanconfig
+.flowconfig
+.metro.config.js
+.rn-cli.config.js
+setup-ide.sh
+babel.config.js
+.buckconfig
+
+# android & ios folders
+android/
+ios/
+
+# bin folder
+bin/
+
+
