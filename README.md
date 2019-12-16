@@ -20,16 +20,16 @@ A step by step series of examples that tell you how to get a development env run
 
 
 ```
-Install Apple Xcode SDK
 Clone and download repo
-Install Viro Media App on iOS or Android device
+Download ViroMedia app on iPhone or Android device
+```
 
 ```
 Install dependencies > npm install
 Start project > npm start
 ```
-Open Viro Media App on iOS or Android device and tap on "Enter Testbed".
-Type in your ngrok url, located at the top of the terminal window where you ran npm start, into the empty text field on Testbed screen (xxxxxx.ngrok.io) and press "Go".
+Run app on ViroMedia by clicking the menu and clicking "Enter testbed"
+Enter the NGrok Packager Server endpoint address and click Go
 ```
 
 ## Deployment
@@ -38,31 +38,27 @@ See above steps for deployment instructions
 
 ## Built With
 
-- [React Native] (https://facebook.github.io/react-native/)
-- [Viro React] - (https://viromedia.com/viroreact)
-- [Firebase] - (https://firebase.google.com/)
-- [Kitten UI] - (https://akveo.github.io/react-native-ui-kitten/)
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+- [React Native](https://facebook.github.io/react-native/)
+- [ViroReact](https://viromedia.com/)
+- [AR Kit](https://docs.expo.io/versions/latest/sdk/AR/)
+- [Firebase](https://firebase.google.com/)
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/AYW-Co-Augment-Your-World/SparkUpYourLife/tags).
 
 ## Authors
 
-- **Arthur Sandro** - _Initial work_ - [Spark](https://github.com/Spark)
-- **Dominique Boyer** - _Initial work_ - [Spark](https://github.com/Spark)
-- **James Fuller** - _Initial work_ - [Spark](https://github.com/Spark)
-- **Rob Wise** - _Initial work_ - [Spark](https://github.com/Spark)
+- **Arthur Sandro** - _Initial work_ - [Spark](https://github.com/AYW-Co-Augment-Your-World/SparkUpYourLife)
+- **Dominique Boyer** - _Initial work_ - [Spark](https://github.com/AYW-Co-Augment-Your-World/SparkUpYourLife)
+- **James Fuller** - _Initial work_ - [Spark](https://github.com/AYW-Co-Augment-Your-World/SparkUpYourLife)
+- **Rob Wise** - _Initial work_ - [Spark](https://github.com/AYW-Co-Augment-Your-World/SparkUpYourLife)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/AYW-Co-Augment-Your-World/SparkUpYourLife/graphs/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License
 
 ## Acknowledgments
 
