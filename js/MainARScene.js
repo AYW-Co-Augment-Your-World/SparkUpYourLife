@@ -91,6 +91,8 @@ export class MainARScene extends Component {
                       height={0.01}
                       width={0.01}
                       marginTop={0.005}
+                      marginLeft={0.002}
+                      marginRight={0.002}
                       loop={true}
                       source={require('./res/linkedin.gif')}
                       onClick={() => Linking.openURL('https://www.linkedin.com/in/arthursandro/')}
@@ -99,6 +101,8 @@ export class MainARScene extends Component {
                       height={0.01}
                       width={0.01}
                       marginTop={0.005}
+                      marginLeft={0.002}
+                      marginRight={0.002}
                       style={styles.image}
                       source={require('./res/github.png')}
                       onClick={() => Linking.openURL('https://github.com/arthurs14')}
@@ -107,6 +111,8 @@ export class MainARScene extends Component {
                       height={0.01}
                       width={0.01}
                       marginTop={0.005}
+                      marginLeft={0.002}
+                      marginRight={0.002} 
                       style={styles.image}
                       source={require('./res/message.png')}
                       onClick={() => alert('message redirection')}
