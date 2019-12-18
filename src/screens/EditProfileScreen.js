@@ -21,14 +21,55 @@ export default class LoginScreen extends Component {
 
     this.state = {
       navigatorType : defaultNavigatorType,
-      email: '',
-      password: ''
+      name: 'Dominique',
+      email: 'dominique@gmail.com',
+      bio: ' ',
+      jobTitle: ' ',
+      interests: [],
+      currentInterest:'',
+      skills: [],
+      currentSkill: '',
+      location: ' '
     }
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
 
     this._goToWelcomeScreen = this._goToWelcomeScreen.bind(this);
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(this);
   }
+
+  // componentDidMount(){
+  //   firebase.auth().onAuthStateChanged(user => {
+
+  //     const profile = firebase.firestore().collection('users').doc(user.email)
+  //     profile.onSnapshot(doc => {
+  //         if (doc && doc.exists) {
+  //             console.log("Document data:", doc.data());
+  //             const user = doc.data()
+  //             this.setState({name: user.name})
+  //             this.setState({email: user.email})
+  //             this.setState({ bio: user.bio})
+  //             this.setState({ jobTitle: user.jobTitle})
+  //             this.setState({ location: user.location})
+  //             this.setState({ skills: user.skills})
+  //             this.setState({ interests: user.interests})
+  //             this.setState({ user: user})
+  //         } else { console.log("No such document!")}
+  //       })
+  //       .catch(function(error) { console.log("Error getting document:", error)});
+  //   })
+  // }
+
+  // saveProfileInfo = () => {
+  //   firebase.firestore().collection("users").doc(this.state.email).update({
+  //     "name": this.state.name,
+  //     "bio": this.state.bio,
+  //     "jobTitle": this.state.jobTitle,
+  //     "location": this.state.location,
+  //     "photo": this.state.photo,
+  //     "interests": this.state.interests,
+  //     "skills": this.state.skills
+  //   })
+  // }
 
   render() {
     if (this.state.navigatorType == UNSET) {
@@ -46,13 +87,119 @@ export default class LoginScreen extends Component {
           <Text style={localStyles.titleText}>
             Edit Profile Screen
           </Text>
+          <View>
+            <Text style={localStyles.subTitle}>Name:</Text>
+            <TextInput
+              style={localStyles.input}
+              autoCapitalize='none'
+              placeholder={this.state.name}
+              onChangeText={ name => this.setState({name})}
+            ></TextInput>
+          </View>
+          <View>
+            <Text style={localStyles.subTitle}>Bio:</Text>
+            <TextInput
+              style={localStyles.input}
+              autoCapitalize='none'
+              placeholder={this.state.bio}
+              onChangeText={ bio => this.setState({bio})}
+            ></TextInput>
+          </View>
+          <View>
+            <Text style={localStyles.subTitle}>Location:</Text>
+            <TextInput
+              style={localStyles.input}
+              autoCapitalize='none'
+              placeholder={this.state.location}
+              onChangeText={ location => this.setState({location})}
+            ></TextInput>
+          </View>
+          <View>
+            <Text style={localStyles.subTitle}>Job Title:</Text>
+            <TextInput
+              style={localStyles.input}
+              autoCapitalize='none'
+              placeholder={this.state.jobTitle}
+              onChangeText={ jobTitle => this.setState({jobTitle})}
+            ></TextInput>
+          </View>
+          {/* <View>
+            <Text style={localStyles.subTitle}>Interests:</Text>
+            <FlatList
+              data={this.state.interests}
+              renderItem={({item}) =>
+                <View>
+                  <Text>{item}</Text>
+                  <TouchableOpacity
+                    onPress={()=> {
+                      console.log('item', item)
+                      this.setState({ interests: this.state.interests.filter( interest => interest !== item)})
+                    }}
+                  >
+                    <Text style={{color:'red'}}>Remove Interest</Text>
+                  </TouchableOpacity>
+                </View>}
+            />
+            <TextInput
+              style={localStyles.input}
+              autoCapitalize='none'
+              placeholder='Add Interest...'
+              value={this.state.currentInterest}
+              onChangeText={ interest => this.setState({currentInterest: interest})}
+            ></TextInput>
+            <Button
+              title='Add interest '
+              onPress={()=> {
+                this.state.interests.push(this.state.currentInterest)
+                this.setState({currentInterest: ''})
+              }}
+            />
+          </View>
+          <View>
+            <Text style={localStyles.subTitle}>Skills:</Text>
+            <FlatList
+              data={this.state.skills}
+              renderItem={({item}) =>
+                <View>
+                  <Text>{item}</Text>
+                  <TouchableOpacity
+                    onPress={()=> {
+                      console.log('item', item)
+                      this.setState({ skills: this.state.skills.filter( skill => skill !== item)})
+                    }}
+                  >
+                    <Text style={{color:'red'}}>Remove Skill</Text>
+                  </TouchableOpacity>
 
+                </View>}
+            />
+            <TextInput
+              style={localStyles.input}
+              autoCapitalize='none'
+              placeholder='Add Skill...'
+              value={this.state.currentSkill}
+              onChangeText={ skill => this.setState({ currentSkill: skill})}
+            ></TextInput>
+            <Button
+              title='Add Skill'
+              onPress={()=> {
+                this.state.skills.push(this.state.currentSkill)
+                this.setState({ currentSkill: ''})
+              }}
+            />
+          </View> */}
+          <TouchableHighlight style={localStyles.buttons}
+            // onPress={}
+            underlayColor={'#68a0ff'} >
+            <Text style={localStyles.buttonText}>Save Profile</Text>
+          </TouchableHighlight>
           <TouchableHighlight style={localStyles.buttons}
             onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
             underlayColor={'#68a0ff'} >
 
             <Text style={localStyles.buttonText}>Welcome Screen</Text>
           </TouchableHighlight>
+
         </View>
       </View>
     );
@@ -74,19 +221,19 @@ export default class LoginScreen extends Component {
 const localStyles = StyleSheet.create({
   viroContainer :{
     flex : 1,
-    backgroundColor: "black",
+    backgroundColor: "lightblue",
   },
   outer : {
     flex : 1,
     flexDirection: 'row',
     alignItems:'center',
-    backgroundColor: "black",
+    backgroundColor: "lightblue",
   },
   inner: {
     flex : 1,
     flexDirection: 'column',
     alignItems:'center',
-    backgroundColor: "black",
+    backgroundColor: "lightblue",
   },
   titleText: {
     paddingTop: 30,
@@ -139,4 +286,11 @@ const localStyles = StyleSheet.create({
     fontSize: 15,
     color: 'white'
   },
+  subTitle:{
+    color: 'white',
+    fontSize: 25
+  },
+  words:{
+    color: 'white'
+  }
 });

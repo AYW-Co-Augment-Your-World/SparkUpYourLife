@@ -71,4 +71,4 @@ ios/
 # bin folder
 bin/
 
-
+*.env

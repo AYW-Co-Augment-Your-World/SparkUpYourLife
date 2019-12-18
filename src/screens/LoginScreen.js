@@ -4,16 +4,32 @@ import {
   View,
   StyleSheet,
   TouchableHighlight,
-  TextInput
+  TextInput,
+  FlatList
 } from 'react-native';
 
 import WelcomeScreen from '../../WelcomeScreen';
 
+import * as firebase from 'firebase';
+// import { FIREBASE_KEY } from 'react-native-dotenv';
+
 const UNSET = "UNSET";
 const WELCOME_TYPE = "WELCOME";
-
-
 const defaultNavigatorType = UNSET;
+
+
+const firebaseConfig = {
+  apiKey: "",
+  authDomain: "spark-ayw.firebaseapp.com",
+  databaseURL: "https://spark-ayw.firebaseio.com",
+  projectId: "spark-ayw",
+  storageBucket: "spark-ayw.appspot.com",
+  messagingSenderId: "84494988286",
+  appId: "1:84494988286:web:ebc6b8b3630399bfc486af",
+  measurementId: "G-R1V75EYLTS"
+};
+
+firebase.initializeApp(firebaseConfig)
 
 export default class LoginScreen extends Component {
   constructor() {
@@ -22,12 +38,13 @@ export default class LoginScreen extends Component {
     this.state = {
       navigatorType : defaultNavigatorType,
       email: '',
-      password: ''
+      password: '',
+      errorMessage: ''
     }
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
-
     this._goToWelcomeScreen = this._goToWelcomeScreen.bind(this);
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
   render() {
@@ -38,6 +55,20 @@ export default class LoginScreen extends Component {
     }
   }
 
+  handleLogin(){
+    const { email, password } = this.state;
+
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .catch(error => this.setState({ errorMessage: error.message }))
+
+  this.setState({errorMessage: 'Logging In...'})
+  this.setState({ navigatorType: WELCOME_TYPE})
+
+
+  }
+
   _getExperienceSelector() {
     return (
       <View style={localStyles.outer} >
@@ -46,28 +77,32 @@ export default class LoginScreen extends Component {
           <Text style={localStyles.titleText}>
             Welcome To SparkUpYourLife!
           </Text>
+          <View>
+            <Text style={localStyles.titleText}>{this.state.errorMessage}</Text>
+          </View>
           <View style={localStyles.forms}>
-          <View style={{ marginTop: 30 }}>
-            <Text style={localStyles.inputTitle}>Email Address</Text>
-            <TextInput
-              style={localStyles.input}
-              autoCapitalize="none"
-              onChangeText={email => this.setState({ email })}
-              // value={this.state.email}
-            ></TextInput>
-          </View>
-          <View style={{ marginTop: 30 }}>
-            <Text style={localStyles.inputTitle}>Password</Text>
-            <TextInput
-              style={localStyles.input}
-              autoCapitalize="none"
-              secureTextEntry
-              onChangeText={password => this.setState({ password })}
-              // value={this.state.password}
-            ></TextInput>
-          </View>
+            <View style={{ marginTop: 30 }}>
+              <Text style={localStyles.inputTitle}>Email Address</Text>
+              <TextInput
+                style={localStyles.input}
+                autoCapitalize="none"
+                onChangeText={email => this.setState({ email })}
+                value={this.state.email}
+              ></TextInput>
+            </View>
+            <View style={{ marginTop: 30 }}>
+              <Text style={localStyles.inputTitle}>Password</Text>
+              <TextInput
+                style={localStyles.input}
+                autoCapitalize="none"
+                secureTextEntry
+                onChangeText={password => this.setState({ password })}
+                value={this.state.password}
+              ></TextInput>
+            </View>
         </View>
           <TouchableHighlight style={localStyles.buttons}
+            // onPress={this.handleLogin}
             onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
             underlayColor={'#68a0ff'} >
 
