@@ -88,27 +88,20 @@ export class MainARScene extends Component {
                   />
                   <ViroFlexView style={styles.iconBar}>
                     <ViroAnimatedImage
-                      height={0.01}
-                      width={0.01}
-                      marginTop={0.005}
+                      style={styles.image}
                       loop={true}
                       source={require('./res/linkedin.gif')}
+                      onClick={() => Linking.openURL('https://www.linkedin.com/in/arthursandro/')}
                     />
                     <ViroImage
-                      height={0.01}
-                      width={0.01}
-                      marginTop={0.005}
                       style={styles.image}
                       source={require('./res/github.png')}
-                      onClick={() => alert('Contact Saved')}
+                      onClick={() => Linking.openURL('https://github.com/arthurs14')}
                     />
                     <ViroImage
-                      height={0.01}
-                      width={0.01}
-                      marginTop={0.005}
                       style={styles.image}
                       source={require('./res/message.png')}
-                      onClick={() => alert('Contact Saved')}
+                      onClick={() => alert('message redirection')}
                     />
                   </ViroFlexView>
                 </ViroFlexView>
@@ -330,7 +323,14 @@ let styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     flex: 0.5
-  }
+  },
+  image: {
+    height: 0.01,
+    width: 0.01,
+    marginTop: 0.005,
+    marginLeft: 0.002,
+    marginRight: 0.002
+  },
 });
 
 ViroARTrackingTargets.createTargets({
