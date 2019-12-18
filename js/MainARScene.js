@@ -93,6 +93,7 @@ export class MainARScene extends Component {
                       marginTop={0.005}
                       loop={true}
                       source={require('./res/linkedin.gif')}
+                      onClick={() => Linking.openURL('https://www.linkedin.com/in/arthursandro/')}
                     />
                     <ViroImage
                       height={0.01}
@@ -100,7 +101,7 @@ export class MainARScene extends Component {
                       marginTop={0.005}
                       style={styles.image}
                       source={require('./res/github.png')}
-                      onClick={() => alert('Contact Saved')}
+                      onClick={() => Linking.openURL('https://github.com/arthurs14')}
                     />
                     <ViroImage
                       height={0.01}
@@ -108,7 +109,7 @@ export class MainARScene extends Component {
                       marginTop={0.005}
                       style={styles.image}
                       source={require('./res/message.png')}
-                      onClick={() => alert('Contact Saved')}
+                      onClick={() => alert('message redirection')}
                     />
                   </ViroFlexView>
                 </ViroFlexView>
