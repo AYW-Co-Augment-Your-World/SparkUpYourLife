@@ -102,8 +102,8 @@ export default class LoginScreen extends Component {
             </View>
         </View>
           <TouchableHighlight style={localStyles.buttons}
-            onPress={this.handleLogin}
-            // onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
+            // onPress={this.handleLogin}
+            onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
             underlayColor={'#68a0ff'} >
 
             <Text style={localStyles.buttonText}>Login</Text>

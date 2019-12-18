@@ -105,7 +105,7 @@ export default class LoginScreen extends Component {
           <Text style={localStyles.subTitle}>Job Title:</Text>
           <Text style={localStyles.words}> {this.state.jobTitle}</Text>
         </View>
-        <View>
+        {/* <View>
           <Text style={localStyles.subTitle}>Interests:</Text>
           <FlatList
             data={this.state.interests}
@@ -118,7 +118,7 @@ export default class LoginScreen extends Component {
             data={this.state.skills}
             renderItem={({item}) => <Text style={localStyles.words}>{item}</Text>}
           />
-        </View>
+        </View> */}
 
 
           <TouchableHighlight style={localStyles.buttons}
