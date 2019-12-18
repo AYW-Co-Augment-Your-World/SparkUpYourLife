@@ -4,10 +4,13 @@ import {
   View,
   StyleSheet,
   TouchableHighlight,
-  TextInput
+  TextInput,
+  FlatList
 } from 'react-native';
 
 import EditProfileScreen from './EditProfileScreen'
+import * as firebase from 'firebase';
+
 
 const UNSET = "UNSET";
 const EDIT_PROFILE_TYPE = "EDIT_PROFILE";
@@ -19,14 +22,52 @@ export default class LoginScreen extends Component {
 
     this.state = {
       navigatorType : defaultNavigatorType,
-      email: '',
-      password: ''
+      name: 'Dominique',
+      email: 'dominique@gmail.com',
+      bio: ' ',
+      jobTitle: ' ',
+      interests: [],
+      currentInterest:'',
+      skills: [],
+      currentSkill: '',
+      location: ' '
     }
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
 
     this._goToEditProfileScreen = this._goToEditProfileScreen.bind(this);
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(this);
   }
+
+  componentDidMount(){
+    // firebase.auth().onAuthStateChanged(user => {
+    //   // console.log('user', user)
+    //   // this.setState({email: user.email})
+
+    //   const profile = firebase.firestore().collection('users').doc(user.email)
+
+    //   profile.onSnapshot(doc => {
+    //       if (doc && doc.exists) {
+    //           console.log("Document data:", doc.data());
+    //           const user = doc.data()
+    //           this.setState({name: user.name})
+    //           this.setState({email: user.email})
+    //           this.setState({ bio: user.bio})
+    //           this.setState({ jobTitle: user.jobTitle})
+    //           this.setState({ location: user.location})
+    //           this.setState({ skills: user.skills})
+    //           this.setState({ interests: user.interests})
+    //           this.setState({ user: user})
+    //       } else {
+    //           console.log("No such document!");
+    //       }
+    //     })
+    //     .catch(function(error) {
+    //     console.log("Error getting document:", error);
+    //     });
+    // })
+  }
+
+
 
   render() {
     if (this.state.navigatorType == UNSET) {
@@ -42,8 +83,43 @@ export default class LoginScreen extends Component {
         <View style={localStyles.inner} >
 
           <Text style={localStyles.titleText}>
-            Profile Screen
+            My Profile Screen
           </Text>
+          <View>
+            <Text style={localStyles.subTitle}>Name:</Text>
+            <Text style={localStyles.words}>{this.state.name} </Text>
+          </View>
+        <View>
+          <Text style={localStyles.subTitle}>Email:</Text>
+          <Text style={localStyles.words}>{this.state.email}</Text>
+        </View>
+        <View>
+          <Text style={localStyles.subTitle}>Bio:</Text>
+          <Text style={localStyles.words}>{this.state.bio}</Text>
+        </View>
+        <View>
+          <Text style={localStyles.subTitle}>Location:</Text>
+          <Text style={localStyles.words}> {this.state.location}</Text>
+        </View>
+        <View>
+          <Text style={localStyles.subTitle}>Job Title:</Text>
+          <Text style={localStyles.words}> {this.state.jobTitle}</Text>
+        </View>
+        <View>
+          <Text style={localStyles.subTitle}>Interests:</Text>
+          <FlatList
+            data={this.state.interests}
+            renderItem={({item}) => <Text style={localStyles.words}>{item}</Text>}
+          />
+        </View>
+        <View>
+          <Text style={localStyles.subTitle}>Skills:</Text>
+          <FlatList
+            data={this.state.skills}
+            renderItem={({item}) => <Text style={localStyles.words}>{item}</Text>}
+          />
+        </View>
+
 
           <TouchableHighlight style={localStyles.buttons}
             onPress={this._getExperienceButtonOnPress(EDIT_PROFILE_TYPE)}
@@ -146,4 +222,11 @@ const localStyles = StyleSheet.create({
     fontSize: 15,
     color: 'white'
   },
+  subTitle:{
+    color: 'white',
+    fontSize: 25
+  },
+  words:{
+    color: 'white'
+  }
 });

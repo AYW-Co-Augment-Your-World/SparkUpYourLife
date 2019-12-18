@@ -4,7 +4,8 @@ import {
   View,
   StyleSheet,
   TouchableHighlight,
-  TextInput
+  TextInput,
+  FlatList
 } from 'react-native';
 
 import WelcomeScreen from '../../WelcomeScreen';
@@ -18,7 +19,7 @@ const defaultNavigatorType = UNSET;
 
 
 const firebaseConfig = {
-  apiKey: ,
+  apiKey: "",
   authDomain: "spark-ayw.firebaseapp.com",
   databaseURL: "https://spark-ayw.firebaseio.com",
   projectId: "spark-ayw",
