@@ -1,10 +1,10 @@
 # SparkUpYourLife
 
-AYW Spark App is an Augumented Reality app that is changing the way people network and connect at conferences and events. By utilizing AR, users are able to view profiles of businesses and other attendees. Event organizers are also able to create more engaging and interactive events.
+AYW SparkUpYourLife App is an Augumented Reality app that is changing the way people network and connect at conferences and events. By utilizing AR, users are able to view profiles of businesses and other attendees. Event organizers are also able to create more engaging and interactive events.
 
 ## Getting Started
 
-To get started, clone and download the repo, install dependencies and run on your local machine or on your iOS device using the expo app.
+To get started, clone and download the repo, install dependencies and run on your local machine or on your iOS or android device using the viro media app.
 
 ### Prerequisites
 
@@ -18,14 +18,15 @@ Apple Xcode SDK
 
 A step by step series of examples that tell you how to get a development env running
 
+
 ```
 Clone and download repo
 Download ViroMedia app on iPhone or Android device
 ```
 
+```
 Install dependencies > npm install
 Start project > npm start
-
 ```
 Run app on ViroMedia by clicking the menu and clicking "Enter testbed"
 Enter the NGrok Packager Server endpoint address and click Go
@@ -65,6 +66,7 @@ This project is licensed under the MIT License
 - Jonathan Mann
 - Matt Clark
 - Thomas Weidner
+
 
 ##Tests
 
