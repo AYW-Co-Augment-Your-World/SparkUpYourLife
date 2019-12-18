@@ -9,48 +9,74 @@
 
 import React, { Component } from 'react';
 import {
+  AppRegistry,
   Text,
   View,
   StyleSheet,
+  PixelRatio,
   TouchableHighlight,
 } from 'react-native';
 
-import ProfileScreen from './ProfileScreen'
+import {
+  ViroVRSceneNavigator,
+  ViroARSceneNavigator
+} from 'react-viro';
 
-const UNSET = "UNSET";
-const VR_NAVIGATOR_TYPE = "VR";
-const AR_NAVIGATOR_TYPE = "AR";
-const defaultNavigatorType = UNSET;
 
-export default class WelcomeScreen extends Component {
+/*
+ TODO: Insert your API key below
+ */
+var sharedProps = {
+  apiKey:"API_KEY_HERE",
+}
+
+// Sets the default scene you want for AR and VR
+var InitialARScene = require('./js/MainARScene');
+
+
+var UNSET = "UNSET";
+var AR_NAVIGATOR_TYPE = "AR";
+var PROFILE_TYPE = "PROFILE";
+
+import ProfileScreen from './src/screens/ProfileScreen'
+
+// This determines which type of experience to launch in, or UNSET, if the user should
+// be presented with a choice of AR or VR. By default, we offer the user a choice.
+var defaultNavigatorType = UNSET;
+
+export default class ViroSample extends Component {
   constructor() {
     super();
+
     this.state = {
       navigatorType : defaultNavigatorType,
+      sharedProps : sharedProps
     }
-
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
-
+    this._getARNavigator = this._getARNavigator.bind(this);
     this._goToProfileScreen = this._goToProfileScreen.bind(this);
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(this);
-
+    this._exitViro = this._exitViro.bind(this);
   }
 
+  // Replace this function with the contents of _getVRNavigator() or _getARNavigator()
+  // if you are building a specific type of experience.
   render() {
     if (this.state.navigatorType == UNSET) {
       return this._getExperienceSelector();
-    } else if (this.state.navigatorType == VR_NAVIGATOR_TYPE) {
+    } else if (this.state.navigatorType == PROFILE_TYPE) {
       return this._goToProfileScreen();
     } else if (this.state.navigatorType == AR_NAVIGATOR_TYPE) {
       return this._getARNavigator();
     }
   }
 
+  // Presents the user with a choice of an AR or VR experience
   _getExperienceSelector() {
     return (
       <View style={localStyles.outer} >
         <View style={localStyles.inner} >
-        <Text style={localStyles.titleText}>
+          <Text style={localStyles.titleText}>
             Welcome Screen:
           </Text>
           <Text style={localStyles.titleText}>
@@ -65,7 +91,7 @@ export default class WelcomeScreen extends Component {
           </TouchableHighlight>
 
           <TouchableHighlight style={localStyles.buttons}
-            onPress={this._getExperienceButtonOnPress(VR_NAVIGATOR_TYPE)}
+            onPress={this._getExperienceButtonOnPress(PROFILE_TYPE)}
             underlayColor={'#68a0ff'} >
 
             <Text style={localStyles.buttonText}>Profile</Text>
@@ -74,12 +100,24 @@ export default class WelcomeScreen extends Component {
       </View>
     );
   }
+
+  // Returns the ViroARSceneNavigator which will start the AR experience
+  _getARNavigator() {
+    return (
+      <ViroARSceneNavigator {...this.state.sharedProps}
+        initialScene={{scene: InitialARScene}} />
+    );
+  }
+
+  // Returns the ViroSceneNavigator which will start the VR experience
   _goToProfileScreen() {
     return (
       <ProfileScreen />
     );
   }
 
+  // This function returns an anonymous/lambda function to be used
+  // by the experience selector buttons
   _getExperienceButtonOnPress(navigatorType) {
     return () => {
       this.setState({
@@ -88,9 +126,15 @@ export default class WelcomeScreen extends Component {
     }
   }
 
+  // This function "exits" Viro by setting the navigatorType to UNSET.
+  _exitViro() {
+    this.setState({
+      navigatorType : UNSET
+    })
+  }
 }
 
-const localStyles = StyleSheet.create({
+var localStyles = StyleSheet.create({
   viroContainer :{
     flex : 1,
     backgroundColor: "black",
@@ -145,4 +189,4 @@ const localStyles = StyleSheet.create({
   }
 });
 
-
+module.exports = ViroSample

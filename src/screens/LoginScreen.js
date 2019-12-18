@@ -7,7 +7,7 @@ import {
   TextInput
 } from 'react-native';
 
-import WelcomeScreen from './WelcomeScreen'
+import WelcomeScreen from '../../WelcomeScreen';
 
 const UNSET = "UNSET";
 const WELCOME_TYPE = "WELCOME";

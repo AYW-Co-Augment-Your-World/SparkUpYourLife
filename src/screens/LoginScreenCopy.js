@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Alert
 } from 'react-native';
-import WelcomeScreen from './WelcomeScreen';
+
 
 export default class LoginScreenCopy extends React.Component {
   constructor(){
