@@ -6,6 +6,8 @@ import { StyleSheet, Linking } from 'react-native';
 
 import {
   ViroARScene,
+  ViroDirectionalLight,
+  ViroBox,
   ViroConstants,
   ViroARTrackingTargets,
   ViroMaterials,
@@ -13,10 +15,21 @@ import {
   ViroImage,
   ViroFlexView,
   ViroARImageMarker,
+  ViroARObjectMarker,
+  ViroAmbientLight,
+  ViroARPlane,
   ViroAnimatedImage,
   ViroAnimations,
-  ViroNode
+  ViroNode,
+  Viro3DObject,
+  ViroQuad
 } from 'react-viro';
+
+
+import FSAImageMarker from './FSAImageMarker.js'
+import RobCardMarker from './RobCardMarker.js'
+import JamesCardMarker from './JamesCardMarker.js'
+import EFImageMarker from './EFImageMarker.js'
 
 export class MainARScene extends Component {
   state = {
@@ -35,251 +48,25 @@ export class MainARScene extends Component {
   getARScene() {
     return (
       <ViroNode>
-        <ViroARImageMarker
-          target={'businessCard'}
-          onAnchorFound={() =>
-            this.setState({
-              runAnimation: true
-            })
-          }
-        >
-          <ViroNode key="card">
-            <ViroNode
-              opacity={0}
-              position={[0, -0.02, 0]}
-              animation={{
-                name: 'animateImage',
-                run: this.state.runAnimation
-              }}
-            >
-              <ViroFlexView
-                rotation={[-90, 0, 0]}
-                height={0.03}
-                width={0.05}
-                style={styles.card}
-              >
-                <ViroFlexView style={styles.cardWrapper}>
-                  <ViroImage
-                    height={0.015}
-                    width={0.015}
-                    style={styles.image}
-                    source={require('./res/avatar.jpeg')}
-                    onClick={() => alert('Contact Saved')}
-                  />
-                  <ViroText
-                    textClipMode="None"
-                    text="James Fuller"
-                    scale={[0.015, 0.015, 0.015]}
-                    style={styles.textStyle}
-                  />
-                </ViroFlexView>
-                <ViroFlexView style={styles.subText}>
-                  <ViroText
-                    textClipMode="None"
-                    text="@jfuller957"
-                    scale={[0.01, 0.01, 0.01]}
-                    style={styles.textStyle}
-                  />
-                  <ViroText
-                    textClipMode="None"
-                    text="#jfuller957"
-                    scale={[0.01, 0.01, 0.01]}
-                    style={styles.textStyle}
-                  />
-                  <ViroFlexView style={styles.iconBar}>
-                    <ViroAnimatedImage
-                      style={styles.image}
-                      loop={true}
-                      source={require('./res/linkedin.gif')}
-                      onClick={() => Linking.openURL('https://www.linkedin.com/in/arthursandro/')}
-                    />
-                    <ViroImage
-                      style={styles.image}
-                      source={require('./res/github.png')}
-                      onClick={() => Linking.openURL('https://github.com/arthurs14')}
-                    />
-                    <ViroImage
-                      style={styles.image}
-                      source={require('./res/message.png')}
-                      onClick={() => alert('message redirection')}
-                    />
-                  </ViroFlexView>
-                </ViroFlexView>
-              </ViroFlexView>
-            </ViroNode>
-            <ViroNode
-              opacity={0}
-              position={[0, 0, 0]}
-              rotation={[-90, 0, 0]}
-              animation={{
-                name: 'animateViro',
-                run: this.state.runAnimation
-              }}
-            >
-              <ViroFlexView flexDirection={'column'}>
-                <ViroText
-                  text="www.jfuller957.com"
-                  scale={[0.01, 0.01, 0.01]}
-                  padding={0.001}
-                />
-              </ViroFlexView>
-            </ViroNode>
-          </ViroNode>
-        </ViroARImageMarker>
 
-        <ViroARImageMarker
-          target={'robCard'}
-          onAnchorFound={() =>
-            this.setState({
-              runAnimation: true
-            })
-          }
-        >
-          <ViroNode key="rob-card">
-            <ViroNode
-              opacity={0}
-              position={[0, -0.02, 0]}
-              animation={{
-                name: 'animateImage',
-                run: this.state.runAnimation
-              }}
-            >
-              <ViroFlexView
-                rotation={[-90, 0, 0]}
-                height={0.03}
-                width={0.05}
-                style={styles.card}
-              >
-                <ViroFlexView style={styles.cardWrapper}>
-                  <ViroImage
-                    height={0.015}
-                    width={0.015}
-                    style={styles.image}
-                    source={require('./res/avatar.jpeg')}
-                  />
-                  <ViroText
-                    textClipMode="None"
-                    text="Rob Wise"
-                    scale={[0.015, 0.015, 0.015]}
-                    style={styles.textStyle}
-                  />
-                </ViroFlexView>
-                <ViroFlexView
-                  onTouch={() => alert('linkedin')}
-                  style={styles.subText}
-                >
-                  <ViroText
-                    width={0.01}
-                    height={0.01}
-                    textAlign="left"
-                    textClipMode="None"
-                    text="@jfuller957"
-                    scale={[0.01, 0.01, 0.01]}
-                    style={styles.textStyle}
-                  />
-                  <ViroAnimatedImage
-                    height={0.01}
-                    width={0.01}
-                    loop={true}
-                    source={require('./res/linkedin.gif')}
-                  />
-                </ViroFlexView>
-              </ViroFlexView>
-            </ViroNode>
-            <ViroNode
-              opacity={0}
-              position={[0, 0, 0]}
-              animation={{
-                name: 'animateViro',
-                run: this.state.runAnimation
-              }}
-            >
-              <ViroText
-                text="www.empireflippers.com"
-                rotation={[-90, 0, 0]}
-                scale={[0.01, 0.01, 0.01]}
-                style={styles.textStyle}
-              />
-            </ViroNode>
-          </ViroNode>
-        </ViroARImageMarker>
+        <JamesCardMarker />
 
-        <ViroARImageMarker
-          target={'efLogoCard'}
-          onAnchorFound={() =>
-            this.setState({
-              runAnimation: true
-            })
-          }
-        >
-          <ViroNode key="ef-logo-card">
-            <ViroNode
-              opacity={0}
-              position={[0, -0.02, 0]}
-              animation={{
-                name: 'animateImage',
-                run: this.state.runAnimation
-              }}
-            >
-              <ViroFlexView
-                rotation={[-90, 0, 0]}
-                height={0.03}
-                width={0.05}
-                style={styles.card}
-              >
-                <ViroFlexView
-                  style={styles.cardWrapper}
-                  onClick={() => Linking.openURL('https://empireflippers.com')}
-                >
-                  <ViroImage
-                    height={0.05}
-                    width={0.05}
-                    style={styles.image}
-                    source={require('./res/ef/ef-website.jpg')}
-                  />
-                </ViroFlexView>
-              </ViroFlexView>
-            </ViroNode>
+        <EFImageMarker />
 
-            <ViroNode
-              opacity={0}
-              position={[0, 0.02, 0]}
-              animation={{
-                name: 'animateImage',
-                run: this.state.runAnimation
-              }}
-            >
-              <ViroFlexView
-                rotation={[90, 0, 0]}
-                height={0.03}
-                width={0.05}
-                style={styles.card}
-              >
-                <ViroFlexView
-                  style={styles.cardWrapper}
-                  onClick={() => Linking.openURL('https://empireflippers.com')}
-                >
-                  <ViroImage
-                    height={0.05}
-                    width={0.05}
-                    style={styles.image}
-                    source={require('./res/ef/ef-website.jpg')}
-                  />
-                </ViroFlexView>
-              </ViroFlexView>
-            </ViroNode>
-          </ViroNode>
-        </ViroARImageMarker>
+        <RobCardMarker />
+
+        <FSAImageMarker />
+
       </ViroNode>
+
+
     );
   }
 
   render() {
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
-        {this.state.isTracking
-          ? this.initializeAndCheckTracking()
-          : this.getARScene()}
+        {this.state.isTracking ? this.initializeAndCheckTracking() : this.getARScene()}
       </ViroARScene>
     );
   }
@@ -403,7 +190,5 @@ ViroAnimations.registerAnimations({
     duration: 500
   }
 });
-
-// module.exports = BusinessCard;
 
 module.exports = MainARScene;
