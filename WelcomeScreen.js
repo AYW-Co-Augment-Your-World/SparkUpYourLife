@@ -19,25 +19,30 @@ import {
 
 import { ViroARSceneNavigator } from 'react-viro';
 
+import * as firebase from 'firebase';
+
+
 /*
  TODO: Insert your API key below
  */
-var sharedProps = {
+const sharedProps = {
   apiKey: 'API_KEY_HERE'
 };
 
 // Sets the default scene you want for AR and VR
-var InitialARScene = require('./js/MainARScene');
+const InitialARScene = require('./js/MainARScene');
 
-var UNSET = 'UNSET';
-var AR_NAVIGATOR_TYPE = 'AR';
-var PROFILE_TYPE = 'PROFILE';
+const UNSET = 'UNSET';
+const AR_NAVIGATOR_TYPE = 'AR';
+const PROFILE_TYPE = 'PROFILE';
+const LOGOUT_TYPE = 'LOGOUT'
 
 import ProfileScreen from './src/screens/ProfileScreen';
+import LoginScreen from './src/screens/LoginScreen';
 
 // This determines which type of experience to launch in, or UNSET, if the user should
 // be presented with a choice of AR or VR. By default, we offer the user a choice.
-var defaultNavigatorType = UNSET;
+const defaultNavigatorType = UNSET;
 
 export default class ViroSample extends Component {
   constructor() {
@@ -53,6 +58,7 @@ export default class ViroSample extends Component {
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
       this
     );
+    this._logOut = this._logOut.bind(this);
     this._exitViro = this._exitViro.bind(this);
   }
 
@@ -65,6 +71,8 @@ export default class ViroSample extends Component {
       return this._goToProfileScreen();
     } else if (this.state.navigatorType == AR_NAVIGATOR_TYPE) {
       return this._getARNavigator();
+    } else if (this.state.navigatorType == LOGOUT_TYPE) {
+      return this._logOut();
     }
   }
 
@@ -73,7 +81,7 @@ export default class ViroSample extends Component {
     return (
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>Spark up your life</Text>
+          <Text style={localStyles.titleText}>Spark Up Your Life</Text>
           <Text style={localStyles.titleText}>
             Choose your desired experience:
           </Text>
@@ -93,6 +101,14 @@ export default class ViroSample extends Component {
           >
             <Text style={localStyles.buttonText}>Your Profile</Text>
           </TouchableHighlight>
+
+          <TouchableHighlight
+            style={localStyles.buttons}
+            onPress={this._getExperienceButtonOnPress(LOGOUT_TYPE)}
+            underlayColor={'#68a0ff'}
+          >
+            <Text style={localStyles.buttonText}>Log Out</Text>
+          </TouchableHighlight>
         </View>
       </View>
     );
@@ -111,6 +127,12 @@ export default class ViroSample extends Component {
   // Returns the ViroSceneNavigator which will start the VR experience
   _goToProfileScreen() {
     return <ProfileScreen />;
+  }
+
+  _logOut() {
+    // firebase.auth().signOut();
+
+    return <LoginScreen />;
   }
 
   // This function returns an anonymous/lambda function to be used

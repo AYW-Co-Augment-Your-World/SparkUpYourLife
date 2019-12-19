@@ -10,15 +10,18 @@ import {
 } from 'react-native';
 
 import EditProfileScreen from './EditProfileScreen';
+import WelcomeScreen from '../../WelcomeScreen';
 import profilebg from '../../js/res/profilebg2.jpeg';
 
 import * as firebase from 'firebase';
+import '@firebase/firestore';
 
 const UNSET = 'UNSET';
 const EDIT_PROFILE_TYPE = 'EDIT_PROFILE';
+const WELCOME_TYPE ='WELCOME'
 const defaultNavigatorType = UNSET;
 
-export default class LoginScreen extends Component {
+export default class ProfileScreen extends Component {
   constructor() {
     super();
 
@@ -35,7 +38,7 @@ export default class LoginScreen extends Component {
       location: 'The Greater SLO Area'
     };
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
-
+    this._goToWelcomeScreen = this._goToWelcomeScreen.bind(this);
     this._goToEditProfileScreen = this._goToEditProfileScreen.bind(this);
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
       this
@@ -43,30 +46,24 @@ export default class LoginScreen extends Component {
   }
 
   componentDidMount() {
-    // firebase.auth().onAuthStateChanged(user => {
-    //   // console.log('user', user)
-    //   // this.setState({email: user.email})
-    //   const profile = firebase.firestore().collection('users').doc(user.email)
-    //   profile.onSnapshot(doc => {
-    //       if (doc && doc.exists) {
-    //           console.log("Document data:", doc.data());
-    //           const user = doc.data()
-    //           this.setState({name: user.name})
-    //           this.setState({email: user.email})
-    //           this.setState({ bio: user.bio})
-    //           this.setState({ jobTitle: user.jobTitle})
-    //           this.setState({ location: user.location})
-    //           this.setState({ skills: user.skills})
-    //           this.setState({ interests: user.interests})
-    //           this.setState({ user: user})
-    //       } else {
-    //           console.log("No such document!");
-    //       }
-    //     })
-    //     .catch(function(error) {
-    //     console.log("Error getting document:", error);
-    //     });
-    // })
+
+      firebase.firestore().collection('users').doc(this.state.email)
+      .onSnapshot(doc => {
+          if (doc && doc.exists) {
+              console.log("Document data:", doc.data());
+              const user = doc.data()
+              this.setState({name: user.name})
+              this.setState({email: user.email})
+              this.setState({ bio: user.bio})
+              this.setState({ jobTitle: user.jobTitle})
+              this.setState({ location: user.location})
+              this.setState({ skills: user.skills})
+              this.setState({ interests: user.interests})
+              this.setState({ user: user})
+          } else {
+              console.log("No such document!");
+          }
+        })
   }
 
   render() {
@@ -74,6 +71,8 @@ export default class LoginScreen extends Component {
       return this._getExperienceSelector();
     } else if (this.state.navigatorType == EDIT_PROFILE_TYPE) {
       return this._goToEditProfileScreen();
+    } else if (this.state.navigatorType == WELCOME_TYPE) {
+      return this._goToWelcomeScreen();
     }
   }
 
@@ -128,6 +127,13 @@ export default class LoginScreen extends Component {
             >
               <Text style={localStyles.buttonText}>Edit Profile</Text>
             </TouchableHighlight>
+            <TouchableHighlight
+              style={localStyles.buttons}
+              onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
+              underlayColor={'#68a0ff'}
+            >
+              <Text style={localStyles.buttonText}>Home</Text>
+            </TouchableHighlight>
           </View>
         </View>
       </ImageBackground>
@@ -135,13 +141,8 @@ export default class LoginScreen extends Component {
   }
 
   // Returns the ViroARSceneNavigator which will start the AR experience
-  _getARNavigator() {
-    return (
-      <ViroARSceneNavigator
-        {...this.state.sharedProps}
-        initialScene={{ scene: InitialARScene }}
-      />
-    );
+  _goToWelcomeScreen() {
+    return <WelcomeScreen />;
   }
 
   _goToEditProfileScreen() {

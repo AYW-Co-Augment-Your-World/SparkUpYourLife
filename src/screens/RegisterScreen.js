@@ -10,48 +10,35 @@ import {
 } from 'react-native';
 
 import WelcomeScreen from '../../WelcomeScreen';
+import LoginScreen from '../screens/LoginScreen';
 import welcomebg from '../../js/res/meetup4.jpeg';
-import RegisterScreen from '../screens/RegisterScreen';
 
 import * as firebase from 'firebase';
 // import { FIREBASE_KEY } from 'react-native-dotenv';
 
 const UNSET = 'UNSET';
 const WELCOME_TYPE = 'WELCOME';
-const REGISTER_TYPE = 'REGISTER';
+const LOGIN_TYPE = 'LOGIN';
 const defaultNavigatorType = UNSET;
 
-const firebaseConfig = {
-  apiKey: '',
-  authDomain: 'spark-ayw.firebaseapp.com',
-  databaseURL: 'https://spark-ayw.firebaseio.com',
-  projectId: 'spark-ayw',
-  storageBucket: 'spark-ayw.appspot.com',
-  messagingSenderId: '84494988286',
-  appId: '1:84494988286:web:ebc6b8b3630399bfc486af',
-  measurementId: 'G-R1V75EYLTS'
-};
-
-firebase.initializeApp(firebaseConfig);
-
-export default class LoginScreen extends Component {
+export default class RegisterScreen extends Component {
   constructor() {
     super();
 
     this.state = {
       navigatorType: defaultNavigatorType,
+      name:'',
       email: '',
       password: '',
-      errorMessage: '',
-      logedIN: ''
+      errorMessage: ''
     };
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
     this._goToWelcomeScreen = this._goToWelcomeScreen.bind(this);
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
       this
     );
-    this._goToRegisterScreen = this._goToRegisterScreen.bind(this)
-    this.handleLogin = this.handleLogin.bind(this);
+    this._goToLogin = this._goToLogin.bind(this);
+    this.handleRegister = this.handleRegister.bind(this);
   }
 
   render() {
@@ -59,24 +46,40 @@ export default class LoginScreen extends Component {
       return this._getExperienceSelector();
     } else if (this.state.navigatorType == WELCOME_TYPE) {
       return this._goToWelcomeScreen();
-    } else if (this.state.navigatorType == REGISTER_TYPE) {
-      return this._goToRegisterScreen();
+    } else if (this.state.navigatorType == LOGIN_TYPE) {
+      return this._goToLogin();
     }
   }
 
-  handleLogin() {
-    const { email, password } = this.state;
+  handleRegister() {
+    const { email, password, name } = this.state;
 
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .catch(error => this.setState({ errorMessage: error.message }));
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(userCredentials => {
+        firebase.firestore().collection("users").doc(email).set({
+          name: name,
+          email: email,
+          bio: ' ',
+          jobTitle: ' ',
+          interests: [],
+          skills: [],
+          location: ' ',
+          photo: ' ',
+        })
+        .then(function(){
+          console.log("Document created!")
+        })
+        .catch(function(error){
+          console.error("error writing document: ", error)
+        })
+        return userCredentials.user.updateProfile({
+          displayName: name
+        })
+      })
+      .catch(error => this.setState({ errorMessage: error.message}))
 
-    this.setState({ logedIN: 'Logging In...' });
-    if(this.state.logedIN === 'Logging In...'){
-      this.setState({ navigatorType: WELCOME_TYPE });
-    }
-
+    this.setState({ errorMessage: 'Logging In...' });
+    this.setState({ navigatorType: WELCOME_TYPE });
   }
 
   _getExperienceSelector() {
@@ -92,12 +95,22 @@ export default class LoginScreen extends Component {
               Networking Solutions for the{' '}
               <Text style={localStyles.emphasis}>modern</Text> meet up.
             </Text>
+            <Text style={localStyles.titleText}>Let's Register To Get Started!</Text>
             <View>
               <Text style={localStyles.titleText}>
                 {this.state.errorMessage}
               </Text>
             </View>
             <View style={localStyles.forms}>
+              <View  style={{ marginTop: 30 }} >
+                <Text style={localStyles.inputTitle}>Name</Text>
+                <TextInput
+                  style={localStyles.input}
+                  autoCapitalize='none'
+                  onChangeText={ name => this.setState({ name })}
+                  value={ this.state.name }
+                ></TextInput>
+              </View>
               <View style={{ marginTop: 30 }}>
                 <Text style={localStyles.inputTitle}>Email Address</Text>
                 <TextInput
@@ -120,18 +133,19 @@ export default class LoginScreen extends Component {
             </View>
             <TouchableHighlight
               style={localStyles.buttons}
-              // onPress={this.handleLogin}
-              onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
-              underlayColor={'#68a0ff'}
-            >
-              <Text style={localStyles.buttonText}>Login</Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={localStyles.buttons}
-              onPress={this._getExperienceButtonOnPress(REGISTER_TYPE)}
+              onPress={this.handleRegister}
+              // onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
               underlayColor={'#68a0ff'}
             >
               <Text style={localStyles.buttonText}>Register</Text>
+            </TouchableHighlight>
+            <TouchableHighlight
+              style={localStyles.buttons}
+              // onPress={this.handleLogin}
+              onPress={this._getExperienceButtonOnPress(LOGIN_TYPE)}
+              underlayColor={'#68a0ff'}
+            >
+              <Text style={localStyles.buttonText}>Login</Text>
             </TouchableHighlight>
           </View>
         </View>
@@ -141,8 +155,8 @@ export default class LoginScreen extends Component {
   _goToWelcomeScreen() {
     return <WelcomeScreen />;
   }
-  _goToRegisterScreen() {
-    return <RegisterScreen />;
+  _goToLogin() {
+    return <LoginScreen />;
   }
   _getExperienceButtonOnPress(navigatorType) {
     return () => {
