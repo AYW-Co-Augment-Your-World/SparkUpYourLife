@@ -32,101 +32,178 @@ export class FSAImageMarker extends Component {
   render() {
     return (
       <ViroARImageMarker
-        target={'fsaLogo1'}
-        onAnchorFound={() =>
-          this.setState({
-            runAnimation: true
-          })
-        }
-      >
-        <ViroNode key="fsa1">
-          <ViroNode
-            opacity={0}
-            position={[0, -0.02, 0]}
-            animation={{
-              name: 'animateImage',
-              run: this.state.runAnimation
-            }}
-          >
+      target={'fsaLogo1'}
+      onAnchorFound={() =>
+        this.setState({
+          runAnimation: true
+        })
+      }
+    >
+
+
+      <ViroNode key="fsa1">
+        <ViroNode
+          opacity={0}
+          position={[0, -0.02, -0.22]}
+          animation={{
+            name: 'animateImage',
+            run: this.state.runAnimation
+          }}
+        >
+
+
+
             <ViroFlexView
-              rotation={[-90, 0, 0]}
-              height={0.03}
-              width={0.05}
-              style={styles.card}
-            >
-              <ViroFlexView style={styles.cardWrapper}>
-                <ViroImage
-                  height={0.015}
-                  width={0.015}
-                  style={styles.image}
-                  source={require('./res/fsa/course-report-badge.png')}
-                />
+            rotation={[-90, 0, 0]}
+            height={0.03}
+            width={0.05}
+            style={styles.card}
+          >
 
-                <ViroText
-                  textClipMode="None"
-                  text="Full Stack Academy"
-                  scale={[0.015, 0.015, 0.015]}
-                  style={styles.textStyle}
-                />
-              </ViroFlexView>
-              <ViroFlexView
-                onTouch={() => alert('linkedin')}
-                style={styles.subText}
-              >
-                <ViroText
-                  width={0.01}
-                  height={0.01}
-                  textAlign="left"
-                  textClipMode="None"
-                  text="@jfuller957"
-                  scale={[0.01, 0.01, 0.01]}
-                  style={styles.textStyle}
-                />
-                <ViroImage
-                  height={0.05}
-                  width={0.05}
-                  style={styles.image}
-                  source={require('./res/fsa/course-report-badge.png')}
-                />
-                <ViroImage
-                  height={0.05}
-                  width={0.05}
-                  style={styles.image}
-                  source={require('./res/fsa/fsa-campus.png')}
-                />
-                <ViroImage
-                  height={0.015}
-                  width={0.015}
-                  style={styles.image}
-                  source={require('./res/fsa/email-icon.png')}
-                />
-                <ViroImage
-                  height={0.015}
-                  width={0.015}
-                  style={styles.image}
-                  source={require('./res/fsa/Facebook-icon.png')}
-                />
-              </ViroFlexView>
+            <ViroFlexView
+              onTouch={() => alert('Redirecting to website')}
+              style={styles.subText}
+            >
+
+
+
+
+              <ViroImage
+                height={0.10}
+                width={0.15}
+                style={styles.image}
+                source={require('./res/fsa/fsa-success.png')}
+              />
+
+
+
+
             </ViroFlexView>
+          </ViroFlexView>
           </ViroNode>
 
           <ViroNode
-            opacity={0}
-            position={[0, 0, 0]}
-            animation={{
-              name: 'animateViro',
-              run: this.state.runAnimation
-            }}
+          opacity={0}
+          position={[0, -0.02, -0.10]}
+          animation={{
+            name: 'animateImage',
+            run: this.state.runAnimation
+          }}
+        >
+
+            <ViroFlexView
+            rotation={[-90, 0, 0]}
+            height={0.03}
+            width={0.05}
+            style={styles.card}
           >
-            <ViroText
-              text="www.fullstackacademy.com"
-              rotation={[-90, 0, 0]}
-              scale={[0.01, 0.01, 0.01]}
-              style={styles.textStyle}
-            />
-          </ViroNode>
+
+            <ViroImage
+                height={0.08}
+                width={0.15}
+                style={styles.image}
+                source={require('./res/fsa/fsa-campus.png')}
+              />
+
+              </ViroFlexView>
+
+
         </ViroNode>
-      </ViroARImageMarker>
+
+
+
+
+        <ViroNode
+          opacity={0}
+          position={[0, -0.02, -0.01]}
+          animation={{
+            name: 'animateImage',
+            run: this.state.runAnimation
+          }}
+        >
+
+            <ViroFlexView
+            rotation={[-90, 0, 0]}
+            height={0.03}
+            width={0.05}
+            style={styles.card}
+          >
+
+            <ViroImage
+                height={0.08}
+                width={0.15}
+                style={styles.image}
+                source={require('./res/fsa/fsa-twitter-main.png')}
+              />
+
+              </ViroFlexView>
+
+
+        </ViroNode>
+
+        <ViroNode
+          opacity={0}
+          position={[0, -0.11, 0.09]}
+          animation={{
+            name: 'animateImage',
+            run: this.state.runAnimation
+          }}
+        >
+
+            <ViroFlexView
+            rotation={[-90, 0, 0]}
+            height={0.03}
+            width={0.05}
+            style={styles.card}
+          >
+
+            <ViroImage
+                height={0.08}
+                width={0.15}
+                style={styles.image}
+                source={require('./res/fsa/fsa-tweet1.png')}
+              />
+
+              </ViroFlexView>
+
+
+        </ViroNode>
+
+
+        <ViroNode
+          opacity={0}
+          position={[0, -0.21, 0.17]}
+          animation={{
+            name: 'animateImage',
+            run: this.state.runAnimation
+          }}
+        >
+
+            <ViroFlexView
+            rotation={[-90, 0, 0]}
+            height={0.03}
+            width={0.05}
+            style={styles.card}
+          >
+
+            <ViroImage
+                height={0.08}
+                width={0.15}
+                style={styles.image}
+                source={require('./res/fsa/fsa-tweet2.png')}
+              />
+
+              </ViroFlexView>
+
+
+        </ViroNode>
+
+
+        </ViroNode>
+
+
+    </ViroARImageMarker>
+
     );
   }
 }
@@ -147,7 +224,7 @@ let styles = StyleSheet.create({
   cardWrapper: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    padding: 0.001,
+    padding: 0.02,
     flex: 0.5
   },
   subText: {
