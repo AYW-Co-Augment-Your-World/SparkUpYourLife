@@ -78,8 +78,10 @@ export default class LoginScreen extends Component {
       >
         <View style={localStyles.outer}>
           <View style={localStyles.inner}>
-            <Text style={localStyles.titleText}>
-              Welcome To SparkUpYourLife!
+            <Text style={localStyles.titleText}>Welcome To Spark!</Text>
+            <Text style={localStyles.subtitleText}>
+              Networking Solutions for the{' '}
+              <Text style={localStyles.emphasis}>modern</Text> meet up.
             </Text>
             <View>
               <Text style={localStyles.titleText}>
@@ -145,11 +147,20 @@ const localStyles = StyleSheet.create({
     opacity: 0.85,
     backgroundColor: 'black'
   },
+  emphasis: {
+    fontStyle: 'italic'
+  },
   titleText: {
     paddingTop: 40,
     color: '#fff',
     textAlign: 'center',
     fontSize: 25
+  },
+  subtitleText: {
+    paddingTop: 10,
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 15
   },
   buttonText: {
     color: '#fff',
@@ -157,7 +168,7 @@ const localStyles = StyleSheet.create({
     fontSize: 20
   },
   buttons: {
-    height: 50,
+    height: 45,
     width: 150,
     opacity: 1,
     paddingTop: 10,

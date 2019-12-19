@@ -73,7 +73,7 @@ export default class ViroSample extends Component {
     return (
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>Welcome Screen:</Text>
+          <Text style={localStyles.titleText}>Spark up your life</Text>
           <Text style={localStyles.titleText}>
             Choose your desired experience:
           </Text>
@@ -83,7 +83,7 @@ export default class ViroSample extends Component {
             onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
             underlayColor={'#68a0ff'}
           >
-            <Text style={localStyles.buttonText}>AR</Text>
+            <Text style={localStyles.buttonText}>The AR Experience</Text>
           </TouchableHighlight>
 
           <TouchableHighlight
@@ -91,7 +91,7 @@ export default class ViroSample extends Component {
             onPress={this._getExperienceButtonOnPress(PROFILE_TYPE)}
             underlayColor={'#68a0ff'}
           >
-            <Text style={localStyles.buttonText}>Profile</Text>
+            <Text style={localStyles.buttonText}>Your Profile</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -161,8 +161,8 @@ var localStyles = StyleSheet.create({
     fontSize: 20
   },
   buttons: {
-    height: 80,
-    width: 150,
+    height: 70,
+    width: 200,
     paddingTop: 20,
     paddingBottom: 20,
     marginTop: 10,

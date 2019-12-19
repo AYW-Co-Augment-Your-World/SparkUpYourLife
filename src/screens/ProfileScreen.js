@@ -5,15 +5,17 @@ import {
   StyleSheet,
   TouchableHighlight,
   TextInput,
+  ImageBackground,
   FlatList
 } from 'react-native';
 
-import EditProfileScreen from './EditProfileScreen'
+import EditProfileScreen from './EditProfileScreen';
+import profilebg from '../../js/res/profilebg2.jpeg';
+
 import * as firebase from 'firebase';
 
-
-const UNSET = "UNSET";
-const EDIT_PROFILE_TYPE = "EDIT_PROFILE";
+const UNSET = 'UNSET';
+const EDIT_PROFILE_TYPE = 'EDIT_PROFILE';
 const defaultNavigatorType = UNSET;
 
 export default class LoginScreen extends Component {
@@ -21,30 +23,30 @@ export default class LoginScreen extends Component {
     super();
 
     this.state = {
-      navigatorType : defaultNavigatorType,
+      navigatorType: defaultNavigatorType,
       name: 'Dominique',
       email: 'dominique@gmail.com',
-      bio: ' ',
-      jobTitle: ' ',
+      bio: 'Influencing young minds physically and digitally.',
+      jobTitle: 'Software Engineer',
       interests: [],
-      currentInterest:'',
+      currentInterest: '',
       skills: [],
       currentSkill: '',
-      location: ' '
-    }
+      location: 'The Greater SLO Area'
+    };
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
 
     this._goToEditProfileScreen = this._goToEditProfileScreen.bind(this);
-    this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(this);
+    this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
+      this
+    );
   }
 
-  componentDidMount(){
+  componentDidMount() {
     // firebase.auth().onAuthStateChanged(user => {
     //   // console.log('user', user)
     //   // this.setState({email: user.email})
-
     //   const profile = firebase.firestore().collection('users').doc(user.email)
-
     //   profile.onSnapshot(doc => {
     //       if (doc && doc.exists) {
     //           console.log("Document data:", doc.data());
@@ -67,8 +69,6 @@ export default class LoginScreen extends Component {
     // })
   }
 
-
-
   render() {
     if (this.state.navigatorType == UNSET) {
       return this._getExperienceSelector();
@@ -79,33 +79,34 @@ export default class LoginScreen extends Component {
 
   _getExperienceSelector() {
     return (
-      <View style={localStyles.outer} >
-        <View style={localStyles.inner} >
-
-          <Text style={localStyles.titleText}>
-            My Profile Screen
-          </Text>
-          <View>
-            <Text style={localStyles.subTitle}>Name:</Text>
-            <Text style={localStyles.words}>{this.state.name} </Text>
-          </View>
-        <View>
-          <Text style={localStyles.subTitle}>Email:</Text>
-          <Text style={localStyles.words}>{this.state.email}</Text>
-        </View>
-        <View>
-          <Text style={localStyles.subTitle}>Bio:</Text>
-          <Text style={localStyles.words}>{this.state.bio}</Text>
-        </View>
-        <View>
-          <Text style={localStyles.subTitle}>Location:</Text>
-          <Text style={localStyles.words}> {this.state.location}</Text>
-        </View>
-        <View>
-          <Text style={localStyles.subTitle}>Job Title:</Text>
-          <Text style={localStyles.words}> {this.state.jobTitle}</Text>
-        </View>
-        {/* <View>
+      <ImageBackground
+        source={profilebg}
+        style={{ width: '100%', height: '100%' }}
+      >
+        <View style={localStyles.outer}>
+          <View style={localStyles.inner}>
+            <Text style={localStyles.titleText}>My Profile Screen</Text>
+            <View>
+              <Text style={localStyles.subTitle}>Name:</Text>
+              <Text style={localStyles.words}>{this.state.name} </Text>
+            </View>
+            <View>
+              <Text style={localStyles.subTitle}>Email:</Text>
+              <Text style={localStyles.words}>{this.state.email}</Text>
+            </View>
+            <View>
+              <Text style={localStyles.subTitle}>Bio:</Text>
+              <Text style={localStyles.words}>{this.state.bio}</Text>
+            </View>
+            <View>
+              <Text style={localStyles.subTitle}>Location:</Text>
+              <Text style={localStyles.words}> {this.state.location}</Text>
+            </View>
+            <View>
+              <Text style={localStyles.subTitle}>Job Title:</Text>
+              <Text style={localStyles.words}> {this.state.jobTitle}</Text>
+            </View>
+            {/* <View>
           <Text style={localStyles.subTitle}>Interests:</Text>
           <FlatList
             data={this.state.interests}
@@ -120,92 +121,94 @@ export default class LoginScreen extends Component {
           />
         </View> */}
 
-
-          <TouchableHighlight style={localStyles.buttons}
-            onPress={this._getExperienceButtonOnPress(EDIT_PROFILE_TYPE)}
-            underlayColor={'#68a0ff'} >
-
-            <Text style={localStyles.buttonText}>Edit Profile</Text>
-          </TouchableHighlight>
+            <TouchableHighlight
+              style={localStyles.buttons}
+              onPress={this._getExperienceButtonOnPress(EDIT_PROFILE_TYPE)}
+              underlayColor={'#68a0ff'}
+            >
+              <Text style={localStyles.buttonText}>Edit Profile</Text>
+            </TouchableHighlight>
+          </View>
         </View>
-      </View>
+      </ImageBackground>
     );
   }
 
-   // Returns the ViroARSceneNavigator which will start the AR experience
-   _getARNavigator() {
+  // Returns the ViroARSceneNavigator which will start the AR experience
+  _getARNavigator() {
     return (
-      <ViroARSceneNavigator {...this.state.sharedProps}
-        initialScene={{scene: InitialARScene}} />
+      <ViroARSceneNavigator
+        {...this.state.sharedProps}
+        initialScene={{ scene: InitialARScene }}
+      />
     );
   }
 
   _goToEditProfileScreen() {
-    return (
-      <EditProfileScreen />
-    );
+    return <EditProfileScreen />;
   }
   _getExperienceButtonOnPress(navigatorType) {
     return () => {
       this.setState({
-        navigatorType : navigatorType
-      })
-    }
+        navigatorType: navigatorType
+      });
+    };
   }
 }
 
 const localStyles = StyleSheet.create({
-  viroContainer :{
-    flex : 1,
-    backgroundColor: "black",
+  viroContainer: {
+    flex: 1,
+    backgroundColor: 'black'
   },
-  outer : {
-    flex : 1,
+  outer: {
+    flex: 1,
     flexDirection: 'row',
-    alignItems:'center',
-    backgroundColor: "black",
+    alignItems: 'center'
   },
   inner: {
-    flex : 1,
+    flex: 1,
     flexDirection: 'column',
-    alignItems:'center',
-    backgroundColor: "black",
+    alignItems: 'center',
+    justifyContent: 'center',
+    opacity: 0.85,
+    backgroundColor: 'black'
   },
   titleText: {
     paddingTop: 30,
     paddingBottom: 20,
-    color:'#fff',
-    textAlign:'center',
-    fontSize : 25
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 25
   },
   buttonText: {
-    color:'#fff',
-    textAlign:'center',
-    fontSize : 20
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 20
   },
-  buttons : {
-    height: 50,
+  buttons: {
+    height: 45,
     width: 150,
-    paddingTop:10,
-    paddingBottom:10,
+    paddingTop: 10,
+    paddingBottom: 10,
     marginTop: 10,
-    marginBottom: 10,
-    backgroundColor:'#68a0cf',
+    marginBottom: 30,
+    backgroundColor: '#68a0cf',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: '#fff'
   },
-  exitButton : {
+  exitButton: {
     height: 50,
     width: 100,
-    paddingTop:10,
-    paddingBottom:10,
+    paddingTop: 10,
+    paddingBottom: 10,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor:'#68a0cf',
+    backgroundColor: '#68a0cf',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: '#fff'
   },
   inputTitle: {
     color: 'gray',
@@ -222,11 +225,13 @@ const localStyles = StyleSheet.create({
     fontSize: 15,
     color: 'white'
   },
-  subTitle:{
+  subTitle: {
     color: 'white',
+    textAlign: 'center',
     fontSize: 25
   },
-  words:{
+  words: {
+    padding: 20,
     color: 'white'
   }
 });
