@@ -5,45 +5,48 @@ import {
   StyleSheet,
   TouchableHighlight,
   TextInput,
+  ImageBackground,
   FlatList
 } from 'react-native';
 
 import WelcomeScreen from '../../WelcomeScreen';
+import welcomebg from '../../js/res/meetup4.jpeg';
 
 import * as firebase from 'firebase';
 // import { FIREBASE_KEY } from 'react-native-dotenv';
 
-const UNSET = "UNSET";
-const WELCOME_TYPE = "WELCOME";
+const UNSET = 'UNSET';
+const WELCOME_TYPE = 'WELCOME';
 const defaultNavigatorType = UNSET;
 
-
 const firebaseConfig = {
-  apiKey: "",
-  authDomain: "spark-ayw.firebaseapp.com",
-  databaseURL: "https://spark-ayw.firebaseio.com",
-  projectId: "spark-ayw",
-  storageBucket: "spark-ayw.appspot.com",
-  messagingSenderId: "84494988286",
-  appId: "1:84494988286:web:ebc6b8b3630399bfc486af",
-  measurementId: "G-R1V75EYLTS"
+  apiKey: '',
+  authDomain: 'spark-ayw.firebaseapp.com',
+  databaseURL: 'https://spark-ayw.firebaseio.com',
+  projectId: 'spark-ayw',
+  storageBucket: 'spark-ayw.appspot.com',
+  messagingSenderId: '84494988286',
+  appId: '1:84494988286:web:ebc6b8b3630399bfc486af',
+  measurementId: 'G-R1V75EYLTS'
 };
 
-firebase.initializeApp(firebaseConfig)
+firebase.initializeApp(firebaseConfig);
 
 export default class LoginScreen extends Component {
   constructor() {
     super();
 
     this.state = {
-      navigatorType : defaultNavigatorType,
+      navigatorType: defaultNavigatorType,
       email: '',
       password: '',
       errorMessage: ''
-    }
+    };
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
     this._goToWelcomeScreen = this._goToWelcomeScreen.bind(this);
-    this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(this);
+    this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
+      this
+    );
     this.handleLogin = this.handleLogin.bind(this);
   }
 
@@ -55,143 +58,153 @@ export default class LoginScreen extends Component {
     }
   }
 
-  handleLogin(){
+  handleLogin() {
     const { email, password } = this.state;
 
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .catch(error => this.setState({ errorMessage: error.message }))
+      .catch(error => this.setState({ errorMessage: error.message }));
 
-  this.setState({errorMessage: 'Logging In...'})
-  this.setState({ navigatorType: WELCOME_TYPE})
-
-
+    this.setState({ errorMessage: 'Logging In...' });
+    this.setState({ navigatorType: WELCOME_TYPE });
   }
 
   _getExperienceSelector() {
     return (
-      <View style={localStyles.outer} >
-        <View style={localStyles.inner} >
-
-          <Text style={localStyles.titleText}>
-            Welcome To SparkUpYourLife!
-          </Text>
-          <View>
-            <Text style={localStyles.titleText}>{this.state.errorMessage}</Text>
+      <ImageBackground
+        source={welcomebg}
+        style={{ width: '100%', height: '100%' }}
+      >
+        <View style={localStyles.outer}>
+          <View style={localStyles.inner}>
+            <Text style={localStyles.titleText}>Welcome To Spark!</Text>
+            <Text style={localStyles.subtitleText}>
+              Networking Solutions for the{' '}
+              <Text style={localStyles.emphasis}>modern</Text> meet up.
+            </Text>
+            <View>
+              <Text style={localStyles.titleText}>
+                {this.state.errorMessage}
+              </Text>
+            </View>
+            <View style={localStyles.forms}>
+              <View style={{ marginTop: 30 }}>
+                <Text style={localStyles.inputTitle}>Email Address</Text>
+                <TextInput
+                  style={localStyles.input}
+                  autoCapitalize="none"
+                  onChangeText={email => this.setState({ email })}
+                  value={this.state.email}
+                ></TextInput>
+              </View>
+              <View style={{ marginTop: 30, marginBottom: 30 }}>
+                <Text style={localStyles.inputTitle}>Password</Text>
+                <TextInput
+                  style={localStyles.input}
+                  autoCapitalize="none"
+                  secureTextEntry
+                  onChangeText={password => this.setState({ password })}
+                  value={this.state.password}
+                ></TextInput>
+              </View>
+            </View>
+            <TouchableHighlight
+              style={localStyles.buttons}
+              // onPress={this.handleLogin}
+              onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
+              underlayColor={'#68a0ff'}
+            >
+              <Text style={localStyles.buttonText}>Login</Text>
+            </TouchableHighlight>
           </View>
-          <View style={localStyles.forms}>
-            <View style={{ marginTop: 30 }}>
-              <Text style={localStyles.inputTitle}>Email Address</Text>
-              <TextInput
-                style={localStyles.input}
-                autoCapitalize="none"
-                onChangeText={email => this.setState({ email })}
-                value={this.state.email}
-              ></TextInput>
-            </View>
-            <View style={{ marginTop: 30 }}>
-              <Text style={localStyles.inputTitle}>Password</Text>
-              <TextInput
-                style={localStyles.input}
-                autoCapitalize="none"
-                secureTextEntry
-                onChangeText={password => this.setState({ password })}
-                value={this.state.password}
-              ></TextInput>
-            </View>
         </View>
-          <TouchableHighlight style={localStyles.buttons}
-            // onPress={this.handleLogin}
-            onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
-            underlayColor={'#68a0ff'} >
-
-            <Text style={localStyles.buttonText}>Login</Text>
-          </TouchableHighlight>
-        </View>
-      </View>
+      </ImageBackground>
     );
   }
   _goToWelcomeScreen() {
-    return (
-      <WelcomeScreen />
-    );
+    return <WelcomeScreen />;
   }
   _getExperienceButtonOnPress(navigatorType) {
     return () => {
       this.setState({
-        navigatorType : navigatorType
-      })
-    }
+        navigatorType: navigatorType
+      });
+    };
   }
 }
 
 const localStyles = StyleSheet.create({
-  viroContainer :{
-    flex : 1,
-    backgroundColor: "black",
-  },
-  outer : {
-    flex : 1,
+  outer: {
+    flex: 1,
     flexDirection: 'row',
-    alignItems:'center',
-    backgroundColor: "black",
+    alignItems: 'center'
   },
   inner: {
-    flex : 1,
+    flex: 1,
     flexDirection: 'column',
-    alignItems:'center',
-    backgroundColor: "black",
+    alignItems: 'center',
+    opacity: 0.85,
+    backgroundColor: 'black'
+  },
+  emphasis: {
+    fontStyle: 'italic'
   },
   titleText: {
-    paddingTop: 30,
-    paddingBottom: 20,
-    color:'#fff',
-    textAlign:'center',
-    fontSize : 25
+    paddingTop: 40,
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 25
+  },
+  subtitleText: {
+    paddingTop: 10,
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 15
   },
   buttonText: {
-    color:'#fff',
-    textAlign:'center',
-    fontSize : 20
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 20
   },
-  buttons : {
-    height: 50,
+  buttons: {
+    height: 45,
     width: 150,
-    paddingTop:10,
-    paddingBottom:10,
+    opacity: 1,
+    paddingTop: 10,
+    paddingBottom: 10,
     marginTop: 10,
-    marginBottom: 10,
-    backgroundColor:'#68a0cf',
+    marginBottom: 30,
+    backgroundColor: '#68a0cf',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: '#fff'
   },
-  exitButton : {
+  exitButton: {
     height: 50,
     width: 100,
-    paddingTop:10,
-    paddingBottom:10,
+    paddingTop: 10,
+    paddingBottom: 10,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor:'#68a0cf',
+    backgroundColor: '#68a0cf',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: '#fff'
   },
   inputTitle: {
     color: 'gray',
-    fontSize: 10
+    fontSize: 15
   },
   form: {
-    marginBottom: 48,
-    marginHorizontal: 30
+    marginBottom: 10
   },
   input: {
     borderBottomColor: 'blue',
     borderBottomWidth: StyleSheet.hairlineWidth,
     height: 40,
-    fontSize: 15,
+    width: 250,
+    fontSize: 20,
     color: 'white'
-  },
+  }
 });

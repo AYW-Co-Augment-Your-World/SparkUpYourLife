@@ -4,14 +4,15 @@ import {
   View,
   StyleSheet,
   TouchableHighlight,
+  ImageBackground,
   TextInput
 } from 'react-native';
 
-import WelcomeScreen from '../../WelcomeScreen'
+import WelcomeScreen from '../../WelcomeScreen';
+import editProfileBg from '../../js/res/profilebg3.jpeg';
 
-const UNSET = "UNSET";
-const WELCOME_TYPE = "WELCOME";
-
+const UNSET = 'UNSET';
+const WELCOME_TYPE = 'WELCOME';
 
 const defaultNavigatorType = UNSET;
 
@@ -20,21 +21,23 @@ export default class LoginScreen extends Component {
     super();
 
     this.state = {
-      navigatorType : defaultNavigatorType,
+      navigatorType: defaultNavigatorType,
       name: 'Dominique',
       email: 'dominique@gmail.com',
       bio: ' ',
       jobTitle: ' ',
       interests: [],
-      currentInterest:'',
+      currentInterest: '',
       skills: [],
       currentSkill: '',
       location: ' '
-    }
+    };
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
 
     this._goToWelcomeScreen = this._goToWelcomeScreen.bind(this);
-    this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(this);
+    this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
+      this
+    );
   }
 
   // componentDidMount(){
@@ -71,6 +74,18 @@ export default class LoginScreen extends Component {
   //   })
   // }
 
+  startAnimation = () => {
+    Animated.timing(this.state.animation, {
+      toValue: 0,
+      timing: 400
+    }).start(() => {
+      Animated.timing(this.state.animation, {
+        toValue: 1,
+        duration: 400
+      }).start();
+    });
+  };
+
   render() {
     if (this.state.navigatorType == UNSET) {
       return this._getExperienceSelector();
@@ -81,49 +96,50 @@ export default class LoginScreen extends Component {
 
   _getExperienceSelector() {
     return (
-      <View style={localStyles.outer} >
-        <View style={localStyles.inner} >
-
-          <Text style={localStyles.titleText}>
-            Edit Profile Screen
-          </Text>
-          <View>
-            <Text style={localStyles.subTitle}>Name:</Text>
-            <TextInput
-              style={localStyles.input}
-              autoCapitalize='none'
-              placeholder={this.state.name}
-              onChangeText={ name => this.setState({name})}
-            ></TextInput>
-          </View>
-          <View>
-            <Text style={localStyles.subTitle}>Bio:</Text>
-            <TextInput
-              style={localStyles.input}
-              autoCapitalize='none'
-              placeholder={this.state.bio}
-              onChangeText={ bio => this.setState({bio})}
-            ></TextInput>
-          </View>
-          <View>
-            <Text style={localStyles.subTitle}>Location:</Text>
-            <TextInput
-              style={localStyles.input}
-              autoCapitalize='none'
-              placeholder={this.state.location}
-              onChangeText={ location => this.setState({location})}
-            ></TextInput>
-          </View>
-          <View>
-            <Text style={localStyles.subTitle}>Job Title:</Text>
-            <TextInput
-              style={localStyles.input}
-              autoCapitalize='none'
-              placeholder={this.state.jobTitle}
-              onChangeText={ jobTitle => this.setState({jobTitle})}
-            ></TextInput>
-          </View>
-          {/* <View>
+      <ImageBackground
+        source={editProfileBg}
+        style={{ width: '100%', height: '100%' }}
+      >
+        <View style={localStyles.outer}>
+          <View style={localStyles.inner}>
+            <Text style={localStyles.titleText}>Edit Profile Screen</Text>
+            <View>
+              <Text style={localStyles.subTitle}>Name:</Text>
+              <TextInput
+                style={localStyles.input}
+                autoCapitalize="none"
+                placeholder={this.state.name}
+                onChangeText={name => this.setState({ name })}
+              ></TextInput>
+            </View>
+            <View>
+              <Text style={localStyles.subTitle}>Bio:</Text>
+              <TextInput
+                style={localStyles.input}
+                autoCapitalize="none"
+                placeholder={this.state.bio}
+                onChangeText={bio => this.setState({ bio })}
+              ></TextInput>
+            </View>
+            <View>
+              <Text style={localStyles.subTitle}>Location:</Text>
+              <TextInput
+                style={localStyles.input}
+                autoCapitalize="none"
+                placeholder={this.state.location}
+                onChangeText={location => this.setState({ location })}
+              ></TextInput>
+            </View>
+            <View>
+              <Text style={localStyles.subTitle}>Job Title:</Text>
+              <TextInput
+                style={localStyles.input}
+                autoCapitalize="none"
+                placeholder={this.state.jobTitle}
+                onChangeText={jobTitle => this.setState({ jobTitle })}
+              ></TextInput>
+            </View>
+            {/* <View>
             <Text style={localStyles.subTitle}>Interests:</Text>
             <FlatList
               data={this.state.interests}
@@ -188,91 +204,93 @@ export default class LoginScreen extends Component {
               }}
             />
           </View> */}
-          <TouchableHighlight style={localStyles.buttons}
-            // onPress={}
-            underlayColor={'#68a0ff'} >
-            <Text style={localStyles.buttonText}>Save Profile</Text>
-          </TouchableHighlight>
-          <TouchableHighlight style={localStyles.buttons}
-            onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
-            underlayColor={'#68a0ff'} >
-
-            <Text style={localStyles.buttonText}>Welcome Screen</Text>
-          </TouchableHighlight>
-
+            <TouchableHighlight
+              style={localStyles.buttons}
+              // onPress={}
+              underlayColor={'#68a0ff'}
+            >
+              <Text style={localStyles.buttonText}>Save Profile</Text>
+            </TouchableHighlight>
+            <TouchableHighlight
+              style={localStyles.buttons}
+              onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
+              underlayColor={'#68a0ff'}
+            >
+              <Text style={localStyles.buttonText}>Welcome Screen</Text>
+            </TouchableHighlight>
+          </View>
         </View>
-      </View>
+      </ImageBackground>
     );
   }
   _goToWelcomeScreen() {
-    return (
-      <WelcomeScreen />
-    );
+    return <WelcomeScreen />;
   }
   _getExperienceButtonOnPress(navigatorType) {
     return () => {
       this.setState({
-        navigatorType : navigatorType
-      })
-    }
+        navigatorType: navigatorType
+      });
+    };
   }
 }
 
 const localStyles = StyleSheet.create({
-  viroContainer :{
-    flex : 1,
-    backgroundColor: "lightblue",
+  viroContainer: {
+    flex: 1,
+    backgroundColor: 'lightblue'
   },
-  outer : {
-    flex : 1,
+  outer: {
+    flex: 1,
     flexDirection: 'row',
-    alignItems:'center',
-    backgroundColor: "lightblue",
+    alignItems: 'center'
   },
   inner: {
-    flex : 1,
+    flex: 1,
     flexDirection: 'column',
-    alignItems:'center',
-    backgroundColor: "lightblue",
+    alignItems: 'center',
+    opacity: 0.85,
+    backgroundColor: 'white'
   },
   titleText: {
     paddingTop: 30,
     paddingBottom: 20,
-    color:'#fff',
-    textAlign:'center',
-    fontSize : 25
+    color: '#000',
+    textAlign: 'center',
+    fontSize: 25
   },
   buttonText: {
-    color:'#fff',
-    textAlign:'center',
-    fontSize : 20
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 20
   },
-  buttons : {
+  buttons: {
     height: 50,
-    width: 150,
-    paddingTop:10,
-    paddingBottom:10,
+    width: 200,
+    paddingTop: 10,
+    paddingBottom: 10,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor:'#68a0cf',
+    backgroundColor: '#68a0cf',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: '#fff'
   },
-  exitButton : {
+  exitButton: {
     height: 50,
     width: 100,
-    paddingTop:10,
-    paddingBottom:10,
+    paddingTop: 10,
+    paddingBottom: 10,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor:'#68a0cf',
+    backgroundColor: '#68a0cf',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: '#fff'
   },
   inputTitle: {
     color: 'gray',
+    alignItems: 'center',
     fontSize: 10
   },
   form: {
@@ -283,14 +301,20 @@ const localStyles = StyleSheet.create({
     borderBottomColor: 'blue',
     borderBottomWidth: StyleSheet.hairlineWidth,
     height: 40,
+    width: 200,
     fontSize: 15,
-    color: 'white'
+    marginBottom: 10,
+    alignItems: 'center',
+    color: '#000'
   },
-  subTitle:{
-    color: 'white',
+  subTitle: {
+    color: '#000',
+    alignItems: 'center',
+    justifyContent: 'center',
     fontSize: 25
   },
-  words:{
-    color: 'white'
+  words: {
+    color: '#000',
+    alignItems: 'center'
   }
 });
