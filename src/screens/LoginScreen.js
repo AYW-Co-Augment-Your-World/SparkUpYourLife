@@ -22,7 +22,7 @@ const REGISTER_TYPE = 'REGISTER';
 const defaultNavigatorType = UNSET;
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCsIkBbjs_3Vzpz4d0Sb2ZJmDft2eSzzZY',
+  apiKey: '',
   authDomain: 'spark-ayw.firebaseapp.com',
   databaseURL: 'https://spark-ayw.firebaseio.com',
   projectId: 'spark-ayw',
@@ -120,8 +120,8 @@ export default class LoginScreen extends Component {
             </View>
             <TouchableHighlight
               style={localStyles.buttons}
-              onPress={this.handleLogin}
-              // onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
+              // onPress={this.handleLogin}
+              onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
               underlayColor={'#68a0ff'}
             >
               <Text style={localStyles.buttonText}>Login</Text>
