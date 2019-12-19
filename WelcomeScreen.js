@@ -83,6 +83,9 @@ export default class ViroSample extends Component {
         <View style={localStyles.inner}>
           <Text style={localStyles.titleText}>Spark Up Your Life</Text>
           <Text style={localStyles.titleText}>
+            Hi !
+          </Text>
+          <Text style={localStyles.titleText}>
             Choose your desired experience:
           </Text>
 

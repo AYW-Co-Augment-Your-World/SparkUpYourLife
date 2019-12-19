@@ -75,18 +75,6 @@ export default class EdirProfileScreen extends Component {
     this._getExperienceButtonOnPress(PROFILE_TYPE)
   }
 
-  startAnimation = () => {
-    Animated.timing(this.state.animation, {
-      toValue: 0,
-      timing: 400
-    }).start(() => {
-      Animated.timing(this.state.animation, {
-        toValue: 1,
-        duration: 400
-      }).start();
-    });
-  };
-
   render() {
     if (this.state.navigatorType == UNSET) {
       return this._getExperienceSelector();
@@ -105,7 +93,7 @@ export default class EdirProfileScreen extends Component {
       >
         <View style={localStyles.outer}>
           <View style={localStyles.inner}>
-            <Text style={localStyles.titleText}>Edit Profile Screen</Text>
+            <Text style={localStyles.titleText}>Edit Your Profile</Text>
             <View>
               <Text style={localStyles.subTitle}>Name:</Text>
               <TextInput
@@ -220,7 +208,7 @@ export default class EdirProfileScreen extends Component {
               onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
               underlayColor={'#68a0ff'}
             >
-              <Text style={localStyles.buttonText}>Welcome Screen</Text>
+              <Text style={localStyles.buttonText}>Home</Text>
             </TouchableHighlight>
           </View>
         </View>
