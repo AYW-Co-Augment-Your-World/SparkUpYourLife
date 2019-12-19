@@ -30,6 +30,9 @@ import FSAImageMarker from './FSAImageMarker.js'
 import RobCardMarker from './RobCardMarker.js'
 import JamesCardMarker from './JamesCardMarker.js'
 import EFImageMarker from './EFImageMarker.js'
+import CalPolyImageMarker from './CalPolyImageMarker.js'
+import AppleImageMarker from './AppleImageMarker.js'
+
 
 export class MainARScene extends Component {
   state = {
@@ -160,7 +163,13 @@ ViroARTrackingTargets.createTargets({
     source: require('./res/apple/apple-logos/apple_logo_silver.jpg'),
     orientation: 'Up',
     physicalWidth: 0.05
+  },
+  calPolyLogo1: {
+    source: require('./res/calpoly/calpoly-logo.jpg'),
+    orientation: 'Up',
+    physicalWidth: 0.05
   }
+
 });
 
 ViroMaterials.createMaterials({
@@ -178,16 +187,16 @@ ViroAnimations.registerAnimations({
       positionX: 0.05,
       opacity: 1.0
     },
-    easing: 'Bounce',
-    duration: 500
+    easing: 'Linear',
+    duration: 1000
   },
   animateViro: {
     properties: {
       positionZ: 0.02,
       opacity: 1.0
     },
-    easing: 'Bounce',
-    duration: 500
+    easing: 'Linear',
+    duration: 1000
   }
 });
 
