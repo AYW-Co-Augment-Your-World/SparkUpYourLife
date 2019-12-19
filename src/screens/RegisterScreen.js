@@ -133,8 +133,8 @@ export default class RegisterScreen extends Component {
             </View>
             <TouchableHighlight
               style={localStyles.buttons}
-              // onPress={this.handleRegister}
-              onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
+              onPress={this.handleRegister}
+              // onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
               underlayColor={'#68a0ff'}
             >
               <Text style={localStyles.buttonText}>Register</Text>

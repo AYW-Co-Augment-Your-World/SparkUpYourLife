@@ -22,7 +22,7 @@ const REGISTER_TYPE = 'REGISTER';
 const defaultNavigatorType = UNSET;
 
 const firebaseConfig = {
-  apiKey: '',
+  apiKey: 'AIzaSyCsIkBbjs_3Vzpz4d0Sb2ZJmDft2eSzzZY',
   authDomain: 'spark-ayw.firebaseapp.com',
   databaseURL: 'https://spark-ayw.firebaseio.com',
   projectId: 'spark-ayw',
@@ -42,7 +42,8 @@ export default class LoginScreen extends Component {
       navigatorType: defaultNavigatorType,
       email: '',
       password: '',
-      errorMessage: ''
+      errorMessage: '',
+      logedIN: ''
     };
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
     this._goToWelcomeScreen = this._goToWelcomeScreen.bind(this);
@@ -71,8 +72,11 @@ export default class LoginScreen extends Component {
       .signInWithEmailAndPassword(email, password)
       .catch(error => this.setState({ errorMessage: error.message }));
 
-    this.setState({ errorMessage: 'Logging In...' });
-    this.setState({ navigatorType: WELCOME_TYPE });
+    this.setState({ logedIN: 'Logging In...' });
+    if(this.state.logedIN === 'Logging In...'){
+      this.setState({ navigatorType: WELCOME_TYPE });
+    }
+
   }
 
   _getExperienceSelector() {
@@ -116,15 +120,14 @@ export default class LoginScreen extends Component {
             </View>
             <TouchableHighlight
               style={localStyles.buttons}
-              // onPress={this.handleLogin}
-              onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
+              onPress={this.handleLogin}
+              // onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
               underlayColor={'#68a0ff'}
             >
               <Text style={localStyles.buttonText}>Login</Text>
             </TouchableHighlight>
             <TouchableHighlight
               style={localStyles.buttons}
-              // onPress={this.handleLogin}
               onPress={this._getExperienceButtonOnPress(REGISTER_TYPE)}
               underlayColor={'#68a0ff'}
             >
