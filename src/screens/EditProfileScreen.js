@@ -11,9 +11,13 @@ import {
 import WelcomeScreen from '../../WelcomeScreen';
 import editProfileBg from '../../js/res/profilebg3.jpeg';
 
+import * as firebase from 'firebase';
+import '@firebase/firestore';
+import ProfileScreen from './ProfileScreen';
+
 const UNSET = 'UNSET';
 const WELCOME_TYPE = 'WELCOME';
-
+const PROFILE_TYPE = 'PROFILE'
 const defaultNavigatorType = UNSET;
 
 export default class EdirProfileScreen extends Component {
@@ -33,46 +37,43 @@ export default class EdirProfileScreen extends Component {
       location: ' '
     };
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
-
     this._goToWelcomeScreen = this._goToWelcomeScreen.bind(this);
-    this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
-      this
-    );
+    this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(this);
+    this.saveProfileInfo = this.saveProfileInfo.bind(this);
   }
 
-  // componentDidMount(){
-  //   firebase.auth().onAuthStateChanged(user => {
+  componentDidMount(){
 
-  //     const profile = firebase.firestore().collection('users').doc(user.email)
-  //     profile.onSnapshot(doc => {
-  //         if (doc && doc.exists) {
-  //             console.log("Document data:", doc.data());
-  //             const user = doc.data()
-  //             this.setState({name: user.name})
-  //             this.setState({email: user.email})
-  //             this.setState({ bio: user.bio})
-  //             this.setState({ jobTitle: user.jobTitle})
-  //             this.setState({ location: user.location})
-  //             this.setState({ skills: user.skills})
-  //             this.setState({ interests: user.interests})
-  //             this.setState({ user: user})
-  //         } else { console.log("No such document!")}
-  //       })
-  //       .catch(function(error) { console.log("Error getting document:", error)});
-  //   })
-  // }
+    firebase.firestore().collection('users').doc(this.state.email)
+      .onSnapshot(doc => {
+          if (doc && doc.exists) {
+              console.log("Document data:", doc.data());
+              const user = doc.data()
+              this.setState({name: user.name})
+              this.setState({email: user.email})
+              this.setState({ bio: user.bio})
+              this.setState({ jobTitle: user.jobTitle})
+              this.setState({ location: user.location})
+              this.setState({ skills: user.skills})
+              this.setState({ interests: user.interests})
+              this.setState({ user: user})
+          } else { console.log("No such document!")}
+        })
 
-  // saveProfileInfo = () => {
-  //   firebase.firestore().collection("users").doc(this.state.email).update({
-  //     "name": this.state.name,
-  //     "bio": this.state.bio,
-  //     "jobTitle": this.state.jobTitle,
-  //     "location": this.state.location,
-  //     "photo": this.state.photo,
-  //     "interests": this.state.interests,
-  //     "skills": this.state.skills
-  //   })
-  // }
+  }
+
+  saveProfileInfo = () => {
+    firebase.firestore().collection("users").doc(this.state.email).update({
+      "name": this.state.name,
+      "bio": this.state.bio,
+      "jobTitle": this.state.jobTitle,
+      "location": this.state.location,
+      "photo": this.state.photo,
+      "interests": this.state.interests,
+      "skills": this.state.skills
+    })
+    this._getExperienceButtonOnPress(PROFILE_TYPE)
+  }
 
   startAnimation = () => {
     Animated.timing(this.state.animation, {
@@ -91,6 +92,8 @@ export default class EdirProfileScreen extends Component {
       return this._getExperienceSelector();
     } else if (this.state.navigatorType == WELCOME_TYPE) {
       return this._goToWelcomeScreen();
+    } else if (this.state.navigatorType == PROFILE_TYPE) {
+      return this._goToProfileScreen();
     }
   }
 
@@ -206,7 +209,8 @@ export default class EdirProfileScreen extends Component {
           </View> */}
             <TouchableHighlight
               style={localStyles.buttons}
-              // onPress={}
+              // onPress={this.saveProfileInfo()}
+
               underlayColor={'#68a0ff'}
             >
               <Text style={localStyles.buttonText}>Save Profile</Text>
@@ -225,6 +229,9 @@ export default class EdirProfileScreen extends Component {
   }
   _goToWelcomeScreen() {
     return <WelcomeScreen />;
+  }
+  _goToProfileScreen() {
+    return <ProfileScreen />;
   }
   _getExperienceButtonOnPress(navigatorType) {
     return () => {

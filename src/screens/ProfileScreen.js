@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import EditProfileScreen from './EditProfileScreen';
+import WelcomeScreen from '../../WelcomeScreen';
 import profilebg from '../../js/res/profilebg2.jpeg';
 
 import * as firebase from 'firebase';
@@ -17,6 +18,7 @@ import '@firebase/firestore';
 
 const UNSET = 'UNSET';
 const EDIT_PROFILE_TYPE = 'EDIT_PROFILE';
+const WELCOME_TYPE ='WELCOME'
 const defaultNavigatorType = UNSET;
 
 export default class ProfileScreen extends Component {
@@ -36,7 +38,7 @@ export default class ProfileScreen extends Component {
       location: 'The Greater SLO Area'
     };
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
-
+    this._goToWelcomeScreen = this._goToWelcomeScreen.bind(this);
     this._goToEditProfileScreen = this._goToEditProfileScreen.bind(this);
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
       this
@@ -69,6 +71,8 @@ export default class ProfileScreen extends Component {
       return this._getExperienceSelector();
     } else if (this.state.navigatorType == EDIT_PROFILE_TYPE) {
       return this._goToEditProfileScreen();
+    } else if (this.state.navigatorType == WELCOME_TYPE) {
+      return this._goToWelcomeScreen();
     }
   }
 
@@ -123,6 +127,13 @@ export default class ProfileScreen extends Component {
             >
               <Text style={localStyles.buttonText}>Edit Profile</Text>
             </TouchableHighlight>
+            <TouchableHighlight
+              style={localStyles.buttons}
+              onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
+              underlayColor={'#68a0ff'}
+            >
+              <Text style={localStyles.buttonText}>Home</Text>
+            </TouchableHighlight>
           </View>
         </View>
       </ImageBackground>
@@ -130,13 +141,8 @@ export default class ProfileScreen extends Component {
   }
 
   // Returns the ViroARSceneNavigator which will start the AR experience
-  _getARNavigator() {
-    return (
-      <ViroARSceneNavigator
-        {...this.state.sharedProps}
-        initialScene={{ scene: InitialARScene }}
-      />
-    );
+  _goToWelcomeScreen() {
+    return <WelcomeScreen />;
   }
 
   _goToEditProfileScreen() {
