@@ -74,18 +74,6 @@ export default class LoginScreen extends Component {
   //   })
   // }
 
-  startAnimation = () => {
-    Animated.timing(this.state.animation, {
-      toValue: 0,
-      timing: 400
-    }).start(() => {
-      Animated.timing(this.state.animation, {
-        toValue: 1,
-        duration: 400
-      }).start();
-    });
-  };
-
   render() {
     if (this.state.navigatorType == UNSET) {
       return this._getExperienceSelector();
