@@ -16,7 +16,7 @@ const WELCOME_TYPE = 'WELCOME';
 
 const defaultNavigatorType = UNSET;
 
-export default class LoginScreen extends Component {
+export default class EdirProfileScreen extends Component {
   constructor() {
     super();
 

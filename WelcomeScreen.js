@@ -19,6 +19,9 @@ import {
 
 import { ViroARSceneNavigator } from 'react-viro';
 
+import * as firebase from 'firebase';
+
+
 /*
  TODO: Insert your API key below
  */
@@ -127,7 +130,7 @@ export default class ViroSample extends Component {
   }
 
   _logOut() {
-    firebase.auth().signOut();
+    // firebase.auth().signOut();
 
     return <LoginScreen />;
   }

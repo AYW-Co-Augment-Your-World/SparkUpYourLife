@@ -13,12 +13,13 @@ import EditProfileScreen from './EditProfileScreen';
 import profilebg from '../../js/res/profilebg2.jpeg';
 
 import * as firebase from 'firebase';
+import '@firebase/firestore';
 
 const UNSET = 'UNSET';
 const EDIT_PROFILE_TYPE = 'EDIT_PROFILE';
 const defaultNavigatorType = UNSET;
 
-export default class LoginScreen extends Component {
+export default class ProfileScreen extends Component {
   constructor() {
     super();
 
@@ -43,30 +44,24 @@ export default class LoginScreen extends Component {
   }
 
   componentDidMount() {
-    // firebase.auth().onAuthStateChanged(user => {
-    //   // console.log('user', user)
-    //   // this.setState({email: user.email})
-    //   const profile = firebase.firestore().collection('users').doc(user.email)
-    //   profile.onSnapshot(doc => {
-    //       if (doc && doc.exists) {
-    //           console.log("Document data:", doc.data());
-    //           const user = doc.data()
-    //           this.setState({name: user.name})
-    //           this.setState({email: user.email})
-    //           this.setState({ bio: user.bio})
-    //           this.setState({ jobTitle: user.jobTitle})
-    //           this.setState({ location: user.location})
-    //           this.setState({ skills: user.skills})
-    //           this.setState({ interests: user.interests})
-    //           this.setState({ user: user})
-    //       } else {
-    //           console.log("No such document!");
-    //       }
-    //     })
-    //     .catch(function(error) {
-    //     console.log("Error getting document:", error);
-    //     });
-    // })
+
+      firebase.firestore().collection('users').doc(this.state.email)
+      .onSnapshot(doc => {
+          if (doc && doc.exists) {
+              console.log("Document data:", doc.data());
+              const user = doc.data()
+              this.setState({name: user.name})
+              this.setState({email: user.email})
+              this.setState({ bio: user.bio})
+              this.setState({ jobTitle: user.jobTitle})
+              this.setState({ location: user.location})
+              this.setState({ skills: user.skills})
+              this.setState({ interests: user.interests})
+              this.setState({ user: user})
+          } else {
+              console.log("No such document!");
+          }
+        })
   }
 
   render() {
