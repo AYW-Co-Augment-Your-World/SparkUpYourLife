@@ -35,7 +35,7 @@ export class CalPolyImageMarker extends Component {
     return (
 
       <ViroARImageMarker
-      target={'fsaLogo1'}
+      target={'calPolyLogo1'}
       onAnchorFound={() =>
         this.setState({
           runAnimation: true
@@ -44,10 +44,10 @@ export class CalPolyImageMarker extends Component {
     >
 
 
-      <ViroNode key="fsa1">
+      <ViroNode key="calpoly1">
         <ViroNode
           opacity={0}
-          position={[0, -0.02, 0]}
+          position={[0, -0.02, -0.20]}
           animation={{
             name: 'animateImage',
             run: this.state.runAnimation
@@ -68,49 +68,173 @@ export class CalPolyImageMarker extends Component {
               style={styles.subText}
             >
 
+
+
+
               <ViroImage
                 height={0.10}
                 width={0.15}
                 style={styles.image}
-                source={require('./res/fsa/fsa-campus.png')}
+                source={require('./res/calpoly/cal-poly-learn2.png')}
               />
 
 
 
-              <ViroImage
-                height={0.03}
-                width={0.03}
-                style={styles.image}
-                source={require('./res/fsa/course-report-badge.png')}
-              />
-              <ViroImage
-                height={0.015}
-                width={0.015}
-                style={styles.image}
-                source={require('./res/fsa/email-icon.png')}
-              />
 
             </ViroFlexView>
           </ViroFlexView>
+          </ViroNode>
+
+
+          <ViroNode
+          opacity={0}
+          position={[0, -0.02, -0.07]}
+          animation={{
+            name: 'animateImage',
+            run: this.state.runAnimation
+          }}
+        >
+
+            <ViroFlexView
+            rotation={[-90, 0, 0]}
+            height={0.03}
+            width={0.05}
+            style={styles.card}
+          >
+
+            <ViroImage
+                height={0.05}
+                width={0.15}
+                style={styles.image}
+                source={require('./res/calpoly/cal-poly-outcomes.png')}
+              />
+
+              </ViroFlexView>
+
+
+        </ViroNode>
+
+
+
+          <ViroNode
+          opacity={0}
+          position={[0, -0.02, 0]}
+          animation={{
+            name: 'animateImage',
+            run: this.state.runAnimation
+          }}
+        >
+
+            <ViroFlexView
+            rotation={[-90, 0, 0]}
+            height={0.03}
+            width={0.05}
+            style={styles.card}
+          >
+
+            <ViroImage
+                height={0.08}
+                width={0.15}
+                style={styles.image}
+                source={require('./res/calpoly/cal-poly-campus.png')}
+              />
+
+              </ViroFlexView>
+
+
+        </ViroNode>
+
+
+
+
+        <ViroNode
+          opacity={0}
+          position={[0, -0.11, 0.09]}
+          animation={{
+            name: 'animateImage',
+            run: this.state.runAnimation
+          }}
+        >
+
+            <ViroFlexView
+            rotation={[-90, 0, 0]}
+            height={0.03}
+            width={0.05}
+            style={styles.card}
+          >
+
+            <ViroImage
+                height={0.08}
+                width={0.15}
+                style={styles.image}
+                source={require('./res/calpoly/cal-poly-events.png')}
+              />
+
+              </ViroFlexView>
+
+
         </ViroNode>
 
 
         <ViroNode
           opacity={0}
-          position={[0, 0, 0]}
+          position={[0, -0.21, 0.17]}
           animation={{
-            name: 'animateViro',
+            name: 'animateImage',
             run: this.state.runAnimation
           }}
         >
-          <ViroText
-            text="www.fullstackacademy.com"
+
+            <ViroFlexView
             rotation={[-90, 0, 0]}
-            scale={[0.01, 0.01, 0.01]}
-            style={styles.textStyle}
-          />
+            height={0.03}
+            width={0.05}
+            style={styles.card}
+          >
+
+            <ViroImage
+                height={0.05}
+                width={0.15}
+                style={styles.image}
+                source={require('./res/calpoly/calpoly-event1.png')}
+              />
+
+              </ViroFlexView>
+
+
         </ViroNode>
-      </ViroNode>
+
+
+        <ViroNode
+          opacity={0}
+          position={[0, -0.30, 0.25]}
+          animation={{
+            name: 'animateImage',
+            run: this.state.runAnimation
+          }}
+        >
+
+            <ViroFlexView
+            rotation={[-90, 0, 0]}
+            height={0.03}
+            width={0.05}
+            style={styles.card}
+          >
+
+            <ViroImage
+                height={0.05}
+                width={0.15}
+                style={styles.image}
+                source={require('./res/calpoly/calpoly-event2.png')}
+              />
+
+              </ViroFlexView>
+
+
+        </ViroNode>
+
+
+        </ViroNode>
 
 
     </ViroARImageMarker>

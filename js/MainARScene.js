@@ -60,6 +60,10 @@ export class MainARScene extends Component {
 
         <FSAImageMarker />
 
+        <CalPolyImageMarker />
+
+        <AppleImageMarker />
+
       </ViroNode>
 
 
@@ -188,7 +192,7 @@ ViroAnimations.registerAnimations({
       opacity: 1.0
     },
     easing: 'Linear',
-    duration: 1000
+    duration: 100
   },
   animateViro: {
     properties: {
@@ -196,7 +200,7 @@ ViroAnimations.registerAnimations({
       opacity: 1.0
     },
     easing: 'Linear',
-    duration: 1000
+    duration: 100
   }
 });
 
