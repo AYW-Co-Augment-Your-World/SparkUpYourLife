@@ -35,22 +35,23 @@ const InitialARScene = require('./js/MainARScene');
 const UNSET = 'UNSET';
 const AR_NAVIGATOR_TYPE = 'AR';
 const PROFILE_TYPE = 'PROFILE';
-const LOGOUT_TYPE = 'LOGOUT'
+const LOGOUT_TYPE = 'LOGOUT';
+const defaultNavigatorType = UNSET;
+
 
 import ProfileScreen from './src/screens/ProfileScreen';
 import LoginScreen from './src/screens/LoginScreen';
 
-// This determines which type of experience to launch in, or UNSET, if the user should
-// be presented with a choice of AR or VR. By default, we offer the user a choice.
-const defaultNavigatorType = UNSET;
 
 export default class ViroSample extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       navigatorType: defaultNavigatorType,
-      sharedProps: sharedProps
+      sharedProps: sharedProps,
+      email: this.props.email,
+      name:''
     };
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
     this._getARNavigator = this._getARNavigator.bind(this);
@@ -62,8 +63,6 @@ export default class ViroSample extends Component {
     this._exitViro = this._exitViro.bind(this);
   }
 
-  // Replace this function with the contents of _getVRNavigator() or _getARNavigator()
-  // if you are building a specific type of experience.
   render() {
     if (this.state.navigatorType == UNSET) {
       return this._getExperienceSelector();
@@ -83,7 +82,7 @@ export default class ViroSample extends Component {
         <View style={localStyles.inner}>
           <Text style={localStyles.titleText}>Spark Up Your Life</Text>
           <Text style={localStyles.titleText}>
-            Hi !
+            Hi {this.props.email}!
           </Text>
           <Text style={localStyles.titleText}>
             Choose your desired experience:
@@ -129,7 +128,7 @@ export default class ViroSample extends Component {
 
   // Returns the ViroSceneNavigator which will start the VR experience
   _goToProfileScreen() {
-    return <ProfileScreen />;
+    return <ProfileScreen email={this.state.email}/>;
   }
 
   _logOut() {

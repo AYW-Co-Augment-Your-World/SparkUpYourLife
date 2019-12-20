@@ -139,7 +139,7 @@ export default class LoginScreen extends Component {
     );
   }
   _goToWelcomeScreen() {
-    return <WelcomeScreen />;
+    return <WelcomeScreen email={this.state.email}/>;
   }
   _goToRegisterScreen() {
     return <RegisterScreen />;
