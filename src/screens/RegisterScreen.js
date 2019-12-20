@@ -90,14 +90,13 @@ export default class RegisterScreen extends Component {
       >
         <View style={localStyles.outer}>
           <View style={localStyles.inner}>
-            <Text style={localStyles.titleText}>Welcome To Spark!</Text>
+            <Text style={localStyles.titleText}>Register for Spark!</Text>
             <Text style={localStyles.subtitleText}>
               Networking Solutions for the{' '}
               <Text style={localStyles.emphasis}>modern</Text> meet up.
             </Text>
-            <Text style={localStyles.titleText}>Let's Register To Get Started!</Text>
             <View>
-              <Text style={localStyles.titleText}>
+              <Text style={localStyles.subtitleText}>
                 {this.state.errorMessage}
               </Text>
             </View>
@@ -153,7 +152,7 @@ export default class RegisterScreen extends Component {
     );
   }
   _goToWelcomeScreen() {
-    return <WelcomeScreen />;
+    return <WelcomeScreen name={this.state.name} email={this.state.email}/>;
   }
   _goToLogin() {
     return <LoginScreen />;
@@ -233,7 +232,7 @@ const localStyles = StyleSheet.create({
     marginBottom: 10
   },
   input: {
-    borderBottomColor: 'blue',
+    borderBottomColor: 'white',
     borderBottomWidth: StyleSheet.hairlineWidth,
     height: 40,
     width: 250,

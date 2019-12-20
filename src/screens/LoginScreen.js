@@ -93,7 +93,7 @@ export default class LoginScreen extends Component {
               <Text style={localStyles.emphasis}>modern</Text> meet up.
             </Text>
             <View>
-              <Text style={localStyles.titleText}>
+              <Text style={localStyles.subtitleText}>
                 {this.state.errorMessage}
               </Text>
             </View>
@@ -139,7 +139,7 @@ export default class LoginScreen extends Component {
     );
   }
   _goToWelcomeScreen() {
-    return <WelcomeScreen />;
+    return <WelcomeScreen email={this.state.email}/>;
   }
   _goToRegisterScreen() {
     return <RegisterScreen />;
@@ -219,7 +219,7 @@ const localStyles = StyleSheet.create({
     marginBottom: 10
   },
   input: {
-    borderBottomColor: 'blue',
+    borderBottomColor: 'white',
     borderBottomWidth: StyleSheet.hairlineWidth,
     height: 40,
     width: 250,

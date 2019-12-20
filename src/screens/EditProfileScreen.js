@@ -21,13 +21,13 @@ const PROFILE_TYPE = 'PROFILE'
 const defaultNavigatorType = UNSET;
 
 export default class EdirProfileScreen extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       navigatorType: defaultNavigatorType,
-      name: 'Dominique',
-      email: 'dominique@gmail.com',
+      name: '',
+      email: this.props.email,
       bio: ' ',
       jobTitle: ' ',
       interests: [],
@@ -93,7 +93,7 @@ export default class EdirProfileScreen extends Component {
       >
         <View style={localStyles.outer}>
           <View style={localStyles.inner}>
-            <Text style={localStyles.titleText}>Edit Profile Screen</Text>
+            <Text style={localStyles.titleText}>Edit Your Profile</Text>
             <View>
               <Text style={localStyles.subTitle}>Name:</Text>
               <TextInput
@@ -208,7 +208,7 @@ export default class EdirProfileScreen extends Component {
               onPress={this._getExperienceButtonOnPress(WELCOME_TYPE)}
               underlayColor={'#68a0ff'}
             >
-              <Text style={localStyles.buttonText}>Welcome Screen</Text>
+              <Text style={localStyles.buttonText}>Home</Text>
             </TouchableHighlight>
           </View>
         </View>
@@ -216,10 +216,10 @@ export default class EdirProfileScreen extends Component {
     );
   }
   _goToWelcomeScreen() {
-    return <WelcomeScreen />;
+    return <WelcomeScreen email={this.state.email} />;
   }
   _goToProfileScreen() {
-    return <ProfileScreen />;
+    return <ProfileScreen email={this.state.email} />;
   }
   _getExperienceButtonOnPress(navigatorType) {
     return () => {

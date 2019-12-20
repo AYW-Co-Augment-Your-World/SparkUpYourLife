@@ -22,20 +22,20 @@ const WELCOME_TYPE ='WELCOME'
 const defaultNavigatorType = UNSET;
 
 export default class ProfileScreen extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       navigatorType: defaultNavigatorType,
-      name: 'Dominique',
-      email: 'dominique@gmail.com',
-      bio: 'Influencing young minds physically and digitally.',
-      jobTitle: 'Software Engineer',
+      name: '',
+      email: this.props.email,
+      bio: '',
+      jobTitle: '',
       interests: [],
       currentInterest: '',
       skills: [],
       currentSkill: '',
-      location: 'The Greater SLO Area'
+      location: ''
     };
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
     this._goToWelcomeScreen = this._goToWelcomeScreen.bind(this);
@@ -46,6 +46,7 @@ export default class ProfileScreen extends Component {
   }
 
   componentDidMount() {
+    // this.setState({email: this.props.email})
 
       firebase.firestore().collection('users').doc(this.state.email)
       .onSnapshot(doc => {
@@ -142,11 +143,11 @@ export default class ProfileScreen extends Component {
 
   // Returns the ViroARSceneNavigator which will start the AR experience
   _goToWelcomeScreen() {
-    return <WelcomeScreen />;
+    return <WelcomeScreen email={this.state.email} />;
   }
 
   _goToEditProfileScreen() {
-    return <EditProfileScreen />;
+    return <EditProfileScreen email={this.state.email} />;
   }
   _getExperienceButtonOnPress(navigatorType) {
     return () => {
