@@ -195,7 +195,7 @@ export class FSAImageMarker extends Component {
 
               </ViroFlexView>
 
-
+    
         </ViroNode>
 
 
